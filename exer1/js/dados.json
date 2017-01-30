@@ -1,0 +1,77 @@
+[
+  {
+    "categoria": "Alimentação",
+    "valor": "100,00",
+    "data": "02/01/2017",
+    "tipo": "Débito"
+  },
+  {
+    "categoria": "Lazer",
+    "valor": "160,00",
+    "data": "02/01/2017",
+    "tipo": "Débito"
+  },
+  {
+    "categoria": "Família",
+    "valor": "40,00",
+    "data": "08/01/2017",
+    "tipo": "Débito"
+  },
+  {
+    "categoria": "Viagem",
+    "valor": "1200,00",
+    "data": "20/12/2016",
+    "tipo": "Débito"
+  },
+  {
+    "categoria": "Alimentação",
+    "valor": "70,00",
+    "data": "20/01/2017",
+    "tipo": "Débito"
+  },
+  {
+    "categoria": "Lazer",
+    "valor": "130,00",
+    "data": "22/01/2017",
+    "tipo": "Débito"
+  },
+  {
+    "categoria": "Família",
+    "valor": "98, 50",
+    "data": "28/01/2017",
+    "tipo": "Débito"
+  },
+  {
+    "categoria": "Combustível",
+    "valor": "300,00",
+    "data": "15/01/2017",
+    "tipo": "Débito"
+  },
+  {
+    "categoria": "Compra Mensal",
+    "valor": "900,00",
+    "data": "06/01/2017",
+    "tipo": "Débito"
+  },
+  {
+    "categoria": "Alimentação",
+    "valor": "100,00",
+    "data": "02/01/2017",
+    "tipo": "Débito"},
+  {
+    "categoria": "Transporte",
+    "valor": "270,00",
+    "data": "02/01/2017",
+    "tipo": "Crédito"},
+  {
+    "categoria": "Alimentação",
+    "valor": "500,00",
+    "data": "01/01/2017",
+    "tipo": "Crédito"},
+  {
+    "categoria": "Salário",
+    "valor": "5000,00",
+    "data": "01/01/2017",
+    "tipo": "Crédito"
+  }
+]

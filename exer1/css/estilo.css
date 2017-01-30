@@ -1,0 +1,111 @@
+@charset "UTF-8";
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: "Roboto";
+    font-weight: 400;
+    text-align: center;
+    /*padding: 10px;*/
+    background-color: #efefef;
+    align-items: center;
+    color: #333;
+    margin: 0;
+}
+
+header{
+    position: fixed;
+    /*background-color: #00a8ff;*/
+    height: 50px;
+    width: 100%;
+    z-index: 2;
+}
+
+.logo:hover, .logo {
+    background: url(/img/logo.png) center center no-repeat!important;
+    float: left!important;
+    width: 170px;
+    height: 50px;
+    z-index: 10;
+}
+
+main>h1{
+    line-height: 76px;
+    font-size: 72px;
+    margin-bottom: 30px;
+}
+
+#resumo{
+    padding-top: 80px;
+}
+
+.principal{
+    padding-top: 60px;
+    /*width: 80%;*/
+    /*margin: auto;*/
+    /*background-color: #ffffff;*/
+    /*box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);*/
+}
+
+clear:before,
+.clear:after {
+    content: "";
+    display: table;
+}
+
+.clear:after {
+    clear: both;
+}
+
+.clear {
+    *zoom: 1;
+}
+
+.gauge {
+    display: block;
+    align-content: center;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    margin: 0 auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.size-2 {
+    width: 30%;
+
+}.size-2 {
+    width: 48%;
+}
+
+div#adicionar{
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: #00a8ff;
+    color: white !important;
+    width:60px;
+    height:60px;
+    border-radius:100%;
+    align-content: center;
+    top:90%;
+    left: 90%;
+    position: fixed;
+    float: right;
+    cursor: pointer;
+     border:2px solid;
+    transition: background-color 1s;
+    -webkit-transition: background-color 1s;
+    -woz-transition: background-color 1s;
+    -o-transition: background-color 1s;
+}
+
+div#adicionar:hover{
+    background-color: #919191;
+}
+
+div#adicionar > a>i{
+    color: white;
+    padding-top: 14px;
+}
