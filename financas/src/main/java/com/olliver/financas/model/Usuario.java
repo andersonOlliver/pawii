@@ -5,12 +5,19 @@
  */
 package com.olliver.financas.model;
 
+import com.olliver.financas.validation.Email;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -25,11 +32,34 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    private String nome;
-    private String sobrenome;
-    private String email;
-    private String senha;
 
+    @NotBlank
+    @Column(length = 20, nullable = false)
+    private String nome;
+
+    @NotBlank
+    @Column(length = 50, nullable = false)
+    private String sobrenome;
+
+    @NotEmpty
+    @Email(message = "Informe um email válido")
+    @Column(length = 50, nullable = false)
+    private String email;
+
+    @NotBlank
+    @Column(length = 50, nullable = false)
+    private String senha;
+    
+    
+    private boolean aceite;
+    
+    @Column
+    private LocalDateTime dataCadastro;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TipoUsuario tipo;
+    
     public Long getId() {
         return id;
     }
@@ -70,6 +100,32 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
+    public boolean isAceite() {
+        return aceite;
+    }
+
+    public void setAceite(boolean aceite) {
+        this.aceite = aceite;
+    }
+
+    public LocalDateTime getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDateTime dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public TipoUsuario getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoUsuario tipo) {
+        this.tipo = tipo;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -97,6 +153,8 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", email=" + email + ", senha=" + senha + '}';
+        return "Usuario{" + "id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", email=" + email + ", senha=" + senha + ", aceite=" + aceite + ", dataCadastro=" + dataCadastro + ", tipo=" + tipo + '}';
     }
+
+    
 }

@@ -20,7 +20,7 @@
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>6.0</version>
+            <version>6.1.RC2</version>
             <scope>compile</scope>
         </dependency>
         
@@ -29,6 +29,22 @@
             <groupId>org.glassfish</groupId>
             <artifactId>javax.faces</artifactId>
             <version>2.2.9</version>
+            <scope>compile</scope>
+        </dependency>
+        
+        <!-- Weld (implementação do CDI) -->
+        <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet</artifactId>
+            <version>2.2.9.Final</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Weld depende do Jandex -->
+        <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jandex</artifactId>
+            <version>1.2.3.Final</version>
             <scope>compile</scope>
         </dependency>
         
@@ -86,5 +102,12 @@
             </plugin>
         </plugins>
     </build>
-
+    <repositories>
+        <repository>
+            <url>http://repository.primefaces.org/</url>
+            <id>PrimeFaces-maven-lib</id>
+            <layout>default</layout>
+            <name>Repository for library Primefaces</name>
+        </repository>
+    </repositories>
 </project>
