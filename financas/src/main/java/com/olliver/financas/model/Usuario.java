@@ -59,6 +59,12 @@ public class Usuario implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TipoUsuario tipo;
+
+    public Usuario() {
+        tipo = TipoUsuario.COMUM;
+    }
+    
+    
     
     public Long getId() {
         return id;

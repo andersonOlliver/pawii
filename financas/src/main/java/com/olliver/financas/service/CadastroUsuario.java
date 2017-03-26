@@ -8,6 +8,7 @@ package com.olliver.financas.service;
 import com.olliver.financas.model.Usuario;
 import com.olliver.financas.repository.Usuarios;
 import com.olliver.financas.util.Transactional;
+import java.time.LocalDateTime;
 import javax.inject.Inject;
 
 /**
@@ -23,6 +24,9 @@ public class CadastroUsuario {
     public void salvar(Usuario usuario) throws NegocioException {
         if (usuario == null) {
             throw new NegocioException("Usuário inválido!");
+        }
+        if (usuario.getDataCadastro() == null) {
+            usuario.setDataCadastro(LocalDateTime.now());
         }
         
         this.usuarios.adicionar(usuario);

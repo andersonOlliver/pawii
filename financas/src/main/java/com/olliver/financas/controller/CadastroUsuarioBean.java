@@ -10,18 +10,15 @@ import com.olliver.financas.service.CadastroUsuario;
 import com.olliver.financas.service.NegocioException;
 import com.olliver.financas.util.jsf.FacesUtil;
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
  * @author aluno
  */
-@ManagedBean
+@Named
 @ViewScoped
 public class CadastroUsuarioBean implements Serializable {
 
@@ -41,7 +38,6 @@ public class CadastroUsuarioBean implements Serializable {
     }
 
     public void salvar() {
-        this.usuario.setDataCadastro(LocalDateTime.now());
         try {
             this.cadastro.salvar(usuario);
             FacesUtil.addInfoMessage("Cadastro realizado com sucesso!");
