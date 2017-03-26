@@ -1,0 +1,86 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19/03/2017, 17:28:29
+    Author     : ander
+*/
+
+h1#login{
+    text-align: center
+}
+
+.box{
+    border: 3px solid #f1f1f1;
+    width: 20%;
+    margin-left: 40%;
+}
+
+.box h1{
+    text-transform: uppercase
+}
+@media screen and (min-width:300px) and (max-width: 600px){
+    .box{
+        border: 3px solid #f1f1f1;
+        width: 90%;
+        margin-left: 5%;
+    }
+}
+
+@media screen and (min-width:601px) and (max-width: 1000px){
+    .box{
+        border: 3px solid #f1f1f1;
+        width: 50%;
+        margin-left: 25%;
+    }
+}
+
+.box2{
+    height: 250px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 150px;
+}
+
+div>.box2 > a{
+    text-align: right !important;
+    float: right
+}
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+input[type=submit]:hover{
+    opacity: 0.8;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.container {
+    padding: 16px;
+}
