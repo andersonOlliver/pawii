@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Gestor de gastos</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/estilo.css">
+        <script src="node_modules/scroll-entrance/src/scroll-entrance.js"></script>
+
+        <style>
+            /* Ensure elements are hidden while ScrollEntrance is loading */
+            [data-entrance] {
+                visibility: hidden;
+            }
+        </style>
+        <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css">
+
+        <!--TABELA-->
+        <link rel="stylesheet" href="node_modules/vanilla-datatables/vanilla-dataTables.css">
+        <link rel="stylesheet" href="css/tabela.css">
+
+        <!--MENU-->
+        <link rel="stylesheet" href="css/demo.css">
+        <link rel="stylesheet" href="css/responsivemenu.css">
+
+
+        <!--JQUERY-->
+        <!--<script src="node_modules/jquery/src/jquery.js"></script>-->
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+        <!--MODAL-->
+        <link rel="stylesheet" href="node_modules/jquery-modal/jquery.modal.css">
+        <script src="node_modules/jquery-modal/jquery.modal.js"></script>
+
+
+    </head>
+    <body>
+
+        <!--MENU-->
+        <header>
+            <nav id="menu" class="navigation_container" role="navigation" aria-label="Main menu">
+                <!--<h1>Menu principal</h1>-->
+                <div class="logo">
+
+                    <img src="img/GestorPessoal.png" style="height: 50px"/></div>
+                <ul type="disk" class="navigation" role="menubar">
+                    <li class="active" role="presentation"><a role="menuitem" href="#resumo"> Resumo</a></li>
+                    <li role="presentation"><a role="menuitem" href="#registros"> Registros</a></li>
+                    <li role="presentation"><a role="menuitem" href="cadastrar.html"> Inserir </a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!--GRAFICO DE GASTOS-->
+        <main id="resumo" class="panel principal" data-entrance="fade">
+            <h1>Controle de Gastos Pessoal</h1>
+            <div id="g5" class="gauge size-2" style="background-color: white"></div>
+        </main>
+
+        <!--TABELA-->
+        <section id="registros" class="panel" data-entrance="fade">
+            <table class="table" id="table">
+                <thead>
+                    <tr>
+                        <th>Categoria</th>
+                        <th>Valor</th>
+                        <th>Data</th>
+                        <th>Tipo</th>
+                </thead>
+                <tbody id="lista-gasto">
+                </tbody>
+            </table>
+        </section>
+
+        <form id="login-form" class="modal" style="display: none">
+            <img src="img/loading14.gif" height="100" width="800"/>
+        </form>
+
+        <!--BOTÃO ADICIONAR-->
+        <div id="adicionar" onclick="$('#login-form').modal();">
+            <a href="#login-form" rel="modal:open">
+                <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <footer>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+        </footer>
+
+
+        <script src="js/apollo.js"></script>
+        <script src="js/vanilla.js.responsive.menu.js"></script>
+        <script type="text/javascript">
+            responsivemenu.init({
+                wrapper: document.querySelector('.navigation_container'),
+                togglecontent: 'menu',
+                sticky: 0,
+                onAfterInit: function () {
+                    console.log('after init');
+                },
+                onBeforeToggleOpen: function () {
+                    console.log('before toggle open');
+                },
+                onAfterToggleOpen: function () {
+                    console.log('after toggle open');
+                },
+                onBeforeToggleClose: function () {
+                    console.log('before toggle close');
+                },
+                onAfterToggleClose: function () {
+                    console.log('after toggle close');
+                },
+                onBeforeSubToggleOpen: function () {
+                    console.log('before sub toggle open');
+                },
+                onAfterSubToggleOpen: function () {
+                    console.log('after sub toggle open');
+                },
+                onBeforeSubToggleClose: function () {
+                    console.log('before sub toggle close');
+                },
+                onAfterSubToggleClose: function () {
+                    console.log('after sub toggle close');
+                }
+            });
+        </script>
+
+
+        <script src="node_modules/justgage/raphael-2.1.4.min.js"></script>
+        <script src="node_modules/justgage/justgage.js"></script>
+        <script src="node_modules/vanilla-datatables/vanilla-dataTables.js"></script>
+        <script src="js/controller.js"></script>
+    </body>
+</html>

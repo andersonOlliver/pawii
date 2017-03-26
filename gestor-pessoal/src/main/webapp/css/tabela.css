@@ -1,0 +1,112 @@
+a,
+a:hover,
+a:focus,
+a:active {
+    color: #333;
+    outline: medium none;
+    text-decoration: none;
+}
+
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn.focus:active,
+.btn:active:focus,
+.btn:focus {
+    outline: medium none;
+}
+
+#ribbon {
+    background: #fff none repeat scroll 0 0;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    font-weight: 400;
+    padding: 15px;
+    position: fixed;
+    right: -269px;
+    text-align: center;
+    top: -125px;
+    transform: rotate(45deg);
+    transform-origin: 0 0 0;
+    width: 500px;
+}
+
+#ribbon i {
+    font-size: 21px;
+    padding-right: 5px;
+    vertical-align: middle;
+}
+
+table {
+    background: #fff none repeat scroll 0 0;
+    margin: 10vh auto 20px;
+    padding: 20px 40px;
+}
+
+.dataTable-wrapper {
+    background: #fff none repeat scroll 0 0;
+    margin: 10vh auto 20px;
+    padding: 20px 40px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.dataTable-wrapper table {
+    background-color: transparent;
+    margin: 0;
+}
+
+.dataTable-table th {
+    color: #333;
+    font-weight: 500;
+}
+
+.dataTable-table > thead > tr > th,
+.dataTable-table > tbody > tr > th,
+.dataTable-table > tfoot > tr > th,
+.dataTable-table > thead > tr > td,
+.dataTable-table > tbody > tr > td,
+.dataTable-table > tfoot > tr > td {
+    border-color: transparent;
+}
+
+.dataTable-table > tbody > tr:nth-of-type(2n+1) {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dataTable-selector,
+.dataTable-input {
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid #fff;
+    box-shadow: none;
+    transition: none 0s ease 0s;
+}
+
+.dataTable-sorter::before,
+.dataTable-sorter::after {
+    opacity: 0.6;
+}
+
+.dataTable-sorter::before {
+    border-top-color: #333;
+}
+
+.dataTable-sorter::after {
+    border-bottom-color: #333;
+}
+
+.dataTable-pagination > li.disabled > a {
+    opacity: 0.6;
+}
+
+.dataTable-table td.match {
+    color: #46be8a;
+    font-weight: 600;
+}
+
+.dataTable-editing {
+    opacity: 0.4;
+}
+
+.selectr-container {
+    display: inline-block;
+    margin: 0 10px;
+}
