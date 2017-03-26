@@ -8,6 +8,7 @@ package com.olliver.financas.service;
 import com.olliver.financas.model.Usuario;
 import com.olliver.financas.repository.Usuarios;
 import com.olliver.financas.util.Transactional;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.inject.Inject;
 
@@ -15,8 +16,10 @@ import javax.inject.Inject;
  *
  * @author olliver
  */
-public class CadastroUsuario {
+public class CadastroUsuario implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     @Inject
     private Usuarios usuarios;
 
@@ -28,7 +31,7 @@ public class CadastroUsuario {
         if (usuario.getDataCadastro() == null) {
             usuario.setDataCadastro(LocalDateTime.now());
         }
-        
+
         this.usuarios.adicionar(usuario);
     }
 }

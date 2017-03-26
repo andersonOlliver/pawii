@@ -49,10 +49,10 @@ public class Usuario implements Serializable {
     @NotBlank
     @Column(length = 50, nullable = false)
     private String senha;
-    
-    
+
+    @Column(nullable = false, columnDefinition = "tinyint(1) default 1")
     private boolean aceite;
-    
+
     @Column
     private LocalDateTime dataCadastro;
 
@@ -63,9 +63,7 @@ public class Usuario implements Serializable {
     public Usuario() {
         tipo = TipoUsuario.COMUM;
     }
-    
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -129,8 +127,6 @@ public class Usuario implements Serializable {
     public void setTipo(TipoUsuario tipo) {
         this.tipo = tipo;
     }
-    
-    
 
     @Override
     public int hashCode() {
@@ -162,5 +158,4 @@ public class Usuario implements Serializable {
         return "Usuario{" + "id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", email=" + email + ", senha=" + senha + ", aceite=" + aceite + ", dataCadastro=" + dataCadastro + ", tipo=" + tipo + '}';
     }
 
-    
 }

@@ -23,11 +23,10 @@ public class TransactionInterceptor implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private @Inject
-    EntityManager manager;
+    private @Inject EntityManager manager;
 
     @AroundInvoke
-    public Object invke(InvocationContext context) throws Exception {
+    public Object invoke(InvocationContext context) throws Exception {
         EntityTransaction trx = manager.getTransaction();
         boolean criador = false;
 
