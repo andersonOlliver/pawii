@@ -13,6 +13,7 @@ import java.io.Serializable;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -28,18 +29,21 @@ public class CadastroUsuarioBean implements Serializable {
     private CadastroUsuario cadastro;
     
     private Usuario usuario;
+    
+    @NotEmpty
+    private String confimaSenha;
     private String labelAceite;
     private String textoLicença;
 
     public void inicializar() {
         this.usuario = new Usuario();
-        this.labelAceite = "Eu estou de acordo com os termos de uso";
+        this.labelAceite = "Li e concordo com os termos de uso";
         this.textoLicença = "asdfkljaçsl fkjasçl fjasflkjsafkjasçlfjasçlfk jçslfd jsaça lksjfçlask jfçsk dfja fkjsaçfk jsaflkjsadçlf kjsçflkasjç askjfç sakdjf sakljfçlsak jaçslf jasçlkfj saçdlkfj asçlkfjasçldfj asçlkf jasçfkljsaçf kjsadçfl asjfçlkaj çlj çlsjf çl";
     }
 
     public void salvar() {
         try {
-            this.cadastro.salvar(usuario);
+            this.cadastro.salvar(usuario, confimaSenha);
             FacesUtil.addInfoMessage("Cadastro realizado com sucesso!");
         } catch (NegocioException ex) {
             FacesUtil.addErrorMessage(ex.getMessage());
@@ -62,5 +66,14 @@ public class CadastroUsuarioBean implements Serializable {
     public String getTextoLicença() {
         return textoLicença;
     }
+
+    public String getConfimaSenha() {
+        return confimaSenha;
+    }
+
+    public void setConfimaSenha(String confimaSenha) {
+        this.confimaSenha = confimaSenha;
+    }
+    
 
 }

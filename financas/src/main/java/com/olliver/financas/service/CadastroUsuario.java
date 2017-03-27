@@ -10,7 +10,9 @@ import com.olliver.financas.repository.Usuarios;
 import com.olliver.financas.util.Transactional;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -19,19 +21,31 @@ import javax.inject.Inject;
 public class CadastroUsuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Inject
     private Usuarios usuarios;
 
     @Transactional
-    public void salvar(Usuario usuario) throws NegocioException {
+    public void salvar(Usuario usuario, String senhaConfirmacao) throws NegocioException {
         if (usuario == null) {
             throw new NegocioException("Usuário inválido!");
-        }
-        if (usuario.getDataCadastro() == null) {
-            usuario.setDataCadastro(LocalDateTime.now());
-        }
+        } else {
+            try {
+                Usuario aux = usuarios.porEmail(usuario.getEmail());
+                throw new NegocioException("Email já cadastrado!");
+            } catch (NoResultException ne) {
+                if (!usuario.getSenha().equals(senhaConfirmacao)) {
+                    throw new NegocioException("Senhas não conferem!");
+                }else if(usuario.getDataNascimento().after(new Date())){
+                    throw new NegocioException("Data de nascimento não pode estar no futuro!");
+                }
+                if (usuario.getDataCadastro() == null) {
+                    usuario.setDataCadastro(LocalDateTime.now());
+                }
 
-        this.usuarios.adicionar(usuario);
+                this.usuarios.adicionar(usuario);
+            }
+
+        }
     }
 }

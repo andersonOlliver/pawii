@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,19 +26,25 @@ public class Usuarios implements Serializable {
         return manager.find(Usuario.class, id);
     }
 
+    public Usuario porEmail(String email) {
+        Query query = manager.createQuery("select u from Usuario u where u.email=:email", Usuario.class);
+        query.setParameter("email", email);
+        return (Usuario) query.getSingleResult();
+    }
+
     public List<Usuario> todos() {
         return manager.createQuery("from Usuario", Usuario.class).getResultList();
     }
-    
-    public void adicionar(Usuario usuario){
+
+    public void adicionar(Usuario usuario) {
         manager.persist(usuario);
     }
-    
-    public Usuario guardar(Usuario usuario){
+
+    public Usuario guardar(Usuario usuario) {
         return manager.merge(usuario);
     }
-    
-    public void remover(Usuario usuario){
+
+    public void remover(Usuario usuario) {
         manager.remove(usuario);
     }
 }

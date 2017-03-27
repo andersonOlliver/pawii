@@ -12,49 +12,58 @@
 
     <ui:define name="corpo">
         <div class="ui-g">
-            <div class="ui-g-12 ui-md-6 ui-lg-8"></div>
-            <div class="ui-g-12 ui-md-6 ui-lg-4">
-                <h:form>
-                    <h1><h:outputText value="Crie já a sua conta"/></h1>
+            <div class="ui-g-1 ui-md-3 ui-lg-4"></div>
+            <div class="ui-g-10 ui-md-6 ui-lg-4 login">
+                <h:form id="form-registro">
+                    <h1><h:outputText value="Cadastre-se e use grátis"/></h1>
                     <p:messages showDetail="false" showSummary="true" autoUpdate="true" />
-                    <div class="ui-fluid">
-                        <p:panelGrid columns="1">
-                            <p:outputLabel value="Nome:" for="nome" />
-                            <p:inputText id="nome" value="#{cadastroUsuarioBean.usuario.nome}" 
-                                         title="Nome" required="true" />
+                    <p:tooltip />
+                    <p:panelGrid id="registro" layout="grid" columns="1" styleClass="panelgrid-noborder ui-fluid noborder full">
+                        <p:outputLabel value="Nome:" for="nome" />
+                        <p:inputText id="nome" value="#{cadastroUsuarioBean.usuario.nome}" 
+                                     title="Nome" required="true" />
 
-                            <p:outputLabel value="Sobrenome:" for="sobrenome" />
-                            <p:inputText id="sobrenome" value="#{cadastroUsuarioBean.usuario.sobrenome}" 
-                                         title="Sobrenome" required="true"/>
+                        <p:outputLabel value="Nascimento" for="datanascimento"/>
+                        <p:calendar id="datanascimento" value="#{cadastroUsuarioBean.usuario.dataNascimento}"
+                                    required="true" title="Data nascimento" navigator="true" 
+                                    mask="true" pattern="dd/MM/yyyy"/>
 
-                            <p:outputLabel value="Email:" for="email" />
-                            <p:inputText id="email" value="#{cadastroUsuarioBean.usuario.email}" 
-                                         title="Email" required="true"/>
+                        <p:outputLabel value="Email:" for="email" />
+                        <p:inputText id="email" value="#{cadastroUsuarioBean.usuario.email}" 
+                                     title="Email" required="true"/>
 
-                            <p:outputLabel value="Senha:" for="senha" />
-                            <p:password id="senha" value="#{cadastroUsuarioBean.usuario.senha}" 
-                                        feedback="true" title="Senha" required="true"
-                                        goodLabel="Bom" weakLabel="Fraco" strongLabel="Ótimo"
-                                        promptLabel="Forneça uma senha"/>
+                        <p:outputLabel value="Senha:" for="senha" />
+                        <p:password id="senha" value="#{cadastroUsuarioBean.usuario.senha}" 
+                                    feedback="true" title="Senha" required="true"
+                                    goodLabel="Bom" weakLabel="Fraco" strongLabel="Ótimo"
+                                    promptLabel="Forneça uma senha"/>
 
-                            <h:panelGroup>
-                                <p:selectBooleanCheckbox id="aceite" value="#{cadastroUsuarioBean.usuario.aceite}"
-                                                         required="true"/>
-                                <p:spacer width="5px" />
-                                <p:commandLink onclick="PF('dlg').show()" process="@this">
-                                    <p:outputLabel value="#{cadastroUsuarioBean.labelAceite}" />
-                                </p:commandLink>
-                            </h:panelGroup>
+                        <p:outputLabel value="Repetir Senha:" for="senha2" />
+                        <p:password id="senha2" value="#{cadastroUsuarioBean.confimaSenha}" 
+                                    feedback="true" title="Repita a senha" required="true"
+                                    goodLabel="Bom" weakLabel="Fraco" strongLabel="Ótimo"
+                                    promptLabel="Repita a senha"/>
 
-                            <p:commandButton value="Cadastrar" action="#{cadastroUsuarioBean.salvar()}"/>
-                        </p:panelGrid>
-                    </div>
+                        <h:panelGroup>
+                            <p:selectBooleanCheckbox id="aceite" value="#{cadastroUsuarioBean.usuario.aceite}"
+                                                     required="true" label="Termo de uso"/>
+                            <p:spacer width="5px" />
+                            <p:commandLink onclick="PF('dlg').show()" process="@this">
+                                <p:outputLabel value="#{cadastroUsuarioBean.labelAceite}" />
+                            </p:commandLink>
+                        </h:panelGroup>
+
+                        <p:commandButton value="Começar a usar" action="#{cadastroUsuarioBean.salvar()}"/>
+                    </p:panelGrid>
+
                     <p:dialog header="Dynamic Focus" widgetVar="dlg" responsive="true"
                               resizable="false" style="min-width: 300px">
                         <h:outputText value="#{cadastroUsuarioBean.textoLicença}" />
                     </p:dialog>
                 </h:form>
+                <p:link class="message-login" outcome="entrar" value=">> Já sou cadastrado. Quero fazer login" />
             </div>
+            <div class="ui-g-1 ui-md-3 ui-lg-4"></div>
         </div>
     </ui:define>
 </ui:composition>

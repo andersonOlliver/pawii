@@ -7,10 +7,14 @@
 }
 
 body{
-    font-size: 14px;
+    font-size: 1rem;
     font-family: 'Muli', sans-serif;
     margin: 0px;
     font-weight: normal;
+    background-image: url("../resources/olliver/imagens/fundo.jpg");    
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-attachment: scroll;    
 }
 
 header{
@@ -25,17 +29,73 @@ header > img{
     height: 50px;
 }
 
-.logo:hover, .logo {
+.logo {
     background: url(/img/logo.png) center center no-repeat!important;
     float: left!important;
-    width: 170px;
+    /*width: 170px;*/
     height: 50px;
     z-index: 10;
 }
-
+.logo:hover{
+    opacity: .8;
+    cursor:pointer;
+}
 
 #conteudo{
     padding: 0px 8px;
+}
+
+form#form-registro{
+    margin-top: 14%;
+    /*background: rgba(234, 234, 225, .9);*/
+    background: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 5px;
+    border-radius: 2%;
+    margin-bottom: 10px;
+}
+
+div.full{
+    width: 96% !important;
+    padding: 2%;
+    border: none;
+    background: transparent !important;
+}
+
+div.full > div{
+    background: transparent;
+    border: none;
+}
+
+div.box{
+    border: 3px solid #f1f1f1;
+}
+
+div.login h1{
+    color: whitesmoke;
+    font-weight: 600;
+    font-size: 2rem;
+    text-shadow: 0 0 3px #FFFFFF, 0 0 5px #000000;
+    text-align: center;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.message-login{
+    text-decoration: none;
+    top: 5px;
+    text-align: center;
+    color: dimgray;
+    margin-top: 5px;
+    padding: 5px;
 }
 
 footer {
@@ -43,10 +103,15 @@ footer {
     padding: 5px 8px;
     margin-top: 20px;
     margin-bottom: 10px;
-    /*position: absolute;*/
+    position: fixed;
+    float: bottom;
+    top: 92%;
     bottom:0;
     left:0;
     width:99%;
+    height: 6%;
+    background-color: rgba(31,69,81,.4);
+    color: white;
 }
 
 h1 {
@@ -83,6 +148,7 @@ h1 {
 @media (max-width: 640px) {
     .ui-panelgrid.panelgrid-noborder .ui-grid-responsive .ui-grid-row {
         border: none;
+        background: transparent !important;
     }
 }
 
@@ -90,6 +156,7 @@ h1 {
     border:none;
     margin-top: 10px;
     padding-top: 10px;
+    background: transparent !important;
 }
 
 .ui-panelgrid .ui-panelgrid-cell {

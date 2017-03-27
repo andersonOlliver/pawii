@@ -13,22 +13,31 @@ import javax.faces.context.FacesContext;
  * @author olliver
  */
 public class FacesUtil {
-    
-    public static boolean isPostback(){
+
+    public static boolean isPostback() {
         return FacesContext.getCurrentInstance().isPostback();
     }
-    
-    public static boolean isNotPostback(){
+
+    public static boolean isNotPostback() {
         return !isPostback();
     }
-    
-    public static void addErrorMessage(String message){
+
+    public static void addErrorMessage(String message) {
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
     }
-    
-    public static void addInfoMessage(String message){
-        FacesContext.getCurrentInstance().addMessage(null, 
+
+    public static void addInfoMessage(String message) {
+        FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, message, message));
+    }
+
+    public static void addInfoMessageRedirect(String message) {
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, message, message));
+        
+        FacesContext.getCurrentInstance()
+                .getExternalContext()
+                .getFlash().setKeepMessages(true);
     }
 }

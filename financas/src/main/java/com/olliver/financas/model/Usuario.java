@@ -8,6 +8,7 @@ package com.olliver.financas.model;
 import com.olliver.financas.validation.Email;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -34,22 +39,25 @@ public class Usuario implements Serializable {
     private Long id;
 
     @NotBlank
-    @Column(length = 20, nullable = false)
+    @Column(length = 100, nullable = false)
     private String nome;
 
-    @NotBlank
-    @Column(length = 50, nullable = false)
-    private String sobrenome;
+    @NotNull
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_nascimento", nullable = false)
+    private Date dataNascimento;
 
     @NotEmpty
     @Email(message = "Informe um email válido")
-    @Column(length = 50, nullable = false)
+    @Column(length = 50, nullable = false, unique = true)
     private String email;
 
     @NotBlank
     @Column(length = 50, nullable = false)
     private String senha;
 
+//    @NotNull
+    @AssertTrue()
     @Column(nullable = false, columnDefinition = "tinyint(1) default 1")
     private boolean aceite;
 
@@ -80,12 +88,12 @@ public class Usuario implements Serializable {
         this.nome = nome;
     }
 
-    public String getSobrenome() {
-        return sobrenome;
+    public Date getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public String getEmail() {
@@ -128,6 +136,8 @@ public class Usuario implements Serializable {
         this.tipo = tipo;
     }
 
+   
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -155,7 +165,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", email=" + email + ", senha=" + senha + ", aceite=" + aceite + ", dataCadastro=" + dataCadastro + ", tipo=" + tipo + '}';
+        return "Usuario{" + "id=" + id + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", email=" + email + ", senha=" + senha + ", aceite=" + aceite + ", dataCadastro=" + dataCadastro + ", tipo=" + tipo + '}';
     }
 
 }
