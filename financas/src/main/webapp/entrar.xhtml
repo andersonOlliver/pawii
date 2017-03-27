@@ -10,24 +10,29 @@
         <div class="ui-g">
             <div class="ui-g-1 ui-md-3 ui-lg-4"></div>
             <div class="ui-g-10 ui-md-6 ui-lg-4 login">
-                <p:panel>
-                    <h1>Iniciar sessão</h1>
-                    <div class="imgcontainer">
-                        <p:graphicImage alt="Avatar" class="avatar"
-                                        library="olliver/imagens"  name="user.png"/>
-                    </div>
-                    <p:panelGrid columns="1" layout="grid" styleClass="panelgrid-noborder ui-fluid noborder full">
-                
-                        <p:outputLabel for="login" value="Email:"/>
-                        <p:inputText id="login" value="#{loginBean.email}"/>
 
-                        <p:outputLabel for="senha" value="Senha:"/>
-                        <p:password id="senha" value="#{loginBean.senha}"/>
-                        <p:link value="Esqueceu a senha?"/>
-                        <p:spacer height="20px"/>
-                        <p:commandButton value="Entrar" action="#{loginBean.entrar()}"/>
-                    </p:panelGrid>
+                <p:panel>
+                    <h:form>
+                        <h1>Iniciar sessão</h1>
+                        <div class="imgcontainer">
+                            <p:graphicImage alt="Avatar" class="avatar"
+                                            library="olliver/imagens"  name="user.png"/>
+                        </div>
+                        <p:panelGrid columns="1" layout="grid" styleClass="panelgrid-noborder ui-fluid noborder full">
+                            <p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+
+                            <p:outputLabel for="login" value="Email:"/>
+                            <p:inputText id="login" value="#{loginBean.email}"/>
+
+                            <p:outputLabel for="senha" value="Senha:"/>
+                            <p:password id="senha" value="#{loginBean.senha}"/>
+                            <p:link value="Esqueceu a senha?"/>
+                            <p:spacer height="20px"/>
+                            <p:commandButton value="Entrar" action="#{loginBean.entrar()}"/>
+                        </p:panelGrid>
+                    </h:form>
                 </p:panel>
+
                 <p:link class="message-login" outcome="inscrever" value=">> Novo por aqui? Cadastre-se!" />
             </div>
             <div class="ui-g-1 ui-md-3 ui-lg-4"></div>

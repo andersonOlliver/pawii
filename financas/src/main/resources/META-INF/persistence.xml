@@ -10,7 +10,7 @@
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/financas" />
             <property name="javax.persistence.jdbc.user" value="root" />
-            <property name="javax.persistence.jdbc.password" value="olliver89632" />
+            <property name="javax.persistence.jdbc.password" value="#SERGIO*supermt%6600" />
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			
 <!--            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" /> 

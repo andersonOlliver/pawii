@@ -4,24 +4,44 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
+
     <h:head>
+        <f:facet name="first">
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </f:facet>
         <title><ui:insert name="titulo">Sistema Finanças</ui:insert></title>
-        <h:outputStylesheet library="olliver/css" name="estilo.css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link href="resources/olliver/imagens/pie-chart.png" rel="shortcut icon" /> 
+        
+        <h:outputStylesheet library="olliver/css" name="estilo-com-acesso.css" />
+        
+        
+        
+        <h:outputStylesheet library="olliver/css" name="custom.css" />
+	<h:outputStylesheet library="olliver/css" name="layout.css" />
+	<h:outputStylesheet library="olliver/css" name="components.css" />
+	
+	<h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />
+	<h:outputScript target="body" library="olliver" name="js/app.js" />
+        
+        <link href="../resources/olliver/imagens/pie-chart.png" rel="shortcut icon" /> 
     </h:head>
+
     <h:body>
-        <header>
+        <header class="aw-topbar">
             <h:graphicImage library="olliver/imagens" name="GestorPessoal.png" />
 
-            <div style="float: right; margin-right: 20px; margin-top: 8px">
-                Olá Usuario!</div>
+            <a href="#" class="aw-toggle  js-toggle"><i class="fa  fa-bars"></i></a>
         </header>
+        
+        <aside class="aw-sidebar  js-sidebar">
+		<ui:include src="Menu.xhtml" />
+	</aside>
 
-        <section id="conteudo">
-            <ui:insert name="corpo"/>
-        </section>
+        <section class="aw-content  js-content">
+		<ui:insert name="corpo" />
+	</section>
 
-        <footer> Finanças - Desenvolvido por Anderson Oliveira Santos </footer>
+        <footer id="foot"> Finanças - Desenvolvido por Anderson Oliveira Santos </footer>
+        
     </h:body>
 </html>

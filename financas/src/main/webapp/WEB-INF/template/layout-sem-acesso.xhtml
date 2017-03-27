@@ -10,12 +10,82 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link href="resources/olliver/imagens/pie-chart.png" rel="shortcut icon" />
         <h:outputStylesheet library="olliver/css" name="estilo.css" />
+        <h:outputStylesheet library="olliver/css" name="demo.css" />
+        <h:outputStylesheet library="olliver/css" name="responsivemenu.css" />
+
+        <script>
+            $(document).ready(function () {
+                var pathname = window.location.pathname;
+
+                if (pathname.indexOf("entrar") >= 0) {
+                    $("#entrar").addClass("active");
+                } else if (pathname.indexOf("index") >= 0 || pathname.slice(-10) === "/financas/") {
+                    $("#inicio").addClass("active");
+                } else if (pathname.indexOf("inscrever") >= 0) {
+                    $("#cadastrar").addClass("active");
+                }
+            });
+        </script>
     </h:head>
     <h:body>
+
+
         <header>
-            <h:graphicImage class="logo" library="olliver/imagens" name="GestorPessoal.png" />
+            <nav id="menu" class="navigation_container" role="navigation" aria-label="Main menu">
+                <h:graphicImage class="logo" library="olliver/imagens" name="GestorPessoal.png" />
+
+                <ul type="disk" class="navigation" role="menubar">
+                    <li id="inicio" class="" role="presentation"><p:link outcome="index">Início</p:link></li>
+                    <li id="entrar" class="" role="presentation"><p:link outcome="entrar">Entrar</p:link></li>
+                    <li id="cadastrar" class="" role="presentation"><p:link outcome="inscrever"> Cadastrar</p:link></li>
+                </ul>
+            </nav>
+            <h:outputScript library="olliver/js" name="apollo.js" />
+            <h:outputScript library="olliver/js" name="vanilla.js.responsive.menu.js" />
+            <script type="text/javascript">
+                responsivemenu.init({
+                    wrapper: document.querySelector('.navigation_container'),
+                    togglecontent: 'menu',
+                    sticky: 0,
+                    onAfterInit: function () {
+                        console.log('after init');
+                    },
+                    onBeforeToggleOpen: function () {
+                        console.log('before toggle open');
+                    },
+                    onAfterToggleOpen: function () {
+                        console.log('after toggle open');
+                    },
+                    onBeforeToggleClose: function () {
+                        console.log('before toggle close');
+                    },
+                    onAfterToggleClose: function () {
+                        console.log('after toggle close');
+                    },
+                    onBeforeSubToggleOpen: function () {
+                        console.log('before sub toggle open');
+                    },
+                    onAfterSubToggleOpen: function () {
+                        console.log('after sub toggle open');
+                    },
+                    onBeforeSubToggleClose: function () {
+                        console.log('before sub toggle close');
+                    },
+                    onAfterSubToggleClose: function () {
+                        console.log('after sub toggle close');
+                    }
+                });
+            </script>
         </header>
 
+        <p:ajaxStatus styleClass="ajax-status">
+            <f:facet name="start">
+                <h:graphicImage library="olliver/imagens" name="gears.gif" />
+            </f:facet>
+            <f:facet name="complete">
+                <h:outputText value="" />
+            </f:facet>
+        </p:ajaxStatus>
         <section id="conteudo">
             <ui:insert name="corpo"/>
         </section>

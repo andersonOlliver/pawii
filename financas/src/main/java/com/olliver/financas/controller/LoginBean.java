@@ -8,10 +8,12 @@ package com.olliver.financas.controller;
 import com.olliver.financas.model.Usuario;
 import com.olliver.financas.service.ConsultaLogin;
 import com.olliver.financas.service.NegocioException;
+import com.olliver.financas.util.jsf.FacesUtil;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -20,24 +22,35 @@ import javax.inject.Named;
  * @author olliver
  */
 @Named
-@ViewScoped
+@SessionScoped
 public class LoginBean implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     @Inject
     private ConsultaLogin consulta;
     private String email;
     private String senha;
     private Usuario usuario;
-    
-    public void entrar(){
+
+    public String entrar() {
         try {
             usuario = consulta.login(email, senha);
+            FacesUtil.addInfoMessageRedirect("Bem-vindo " + usuario.getNome());
+            return "/acesso/index.paw?faces-redirect=true";
         } catch (NegocioException ex) {
-            Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+            FacesUtil.addErrorMessage(ex.getMessage());
         }
-        System.out.println("entrou");
+        return null;
+    }
+
+    public String logout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "/entrar?faces-redirect=true";
+    }
+
+    public boolean isLogado() {
+        return usuario != null;
     }
 
     public String getEmail() {
@@ -56,7 +69,8 @@ public class LoginBean implements Serializable {
         this.senha = senha;
     }
 
-    
-    
-    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
 }

@@ -1,0 +1,206 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Muli');
+
+*{
+    margin:0;
+    top:0;
+}
+
+body{
+    font-size: 1rem;
+    font-family: 'Muli', sans-serif;
+    margin: 0px;
+    font-weight: normal;
+    background: url("../resources/olliver/imagens/fundo.jpg") no-repeat center center fixed;    
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;   
+}
+
+header{
+    margin-bottom: 20px;
+    height: 50px;
+    background-color: #1f4551;
+    color: #fff;
+    box-shadow: 0px 2px 2px #ccc;
+}
+
+header > img{
+    height: 50px;
+}
+
+.logo {
+    background: url(/img/logo.png) center center no-repeat!important;
+    float: left!important;
+    /*width: 170px;*/
+    height: 50px;
+    z-index: 10;
+}
+.logo:hover{
+    opacity: .8;
+    cursor:pointer;
+}
+
+.ajax-status {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+}
+
+.ajax-status img{
+    width: 45px;
+    height: 45px
+}
+
+#conteudo{
+    padding: 0px 8px;
+}
+
+form#form-registro{
+    margin-top: 14%;
+    /*background: rgba(234, 234, 225, .9);*/
+    background: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 5px;
+    border-radius: 2%;
+    margin-bottom: 10px;
+}
+
+div.full{
+    width: 96% !important;
+    padding: 2%;
+    border: none;
+    background: transparent !important;
+}
+
+div.full > div{
+    background: transparent;
+    border: none;
+}
+
+div.box{
+    border: 3px solid #f1f1f1;
+}
+
+div.login h1{
+    color: whitesmoke;
+    font-weight: 600;
+    font-size: 2rem;
+    text-shadow: 0 0 3px #FFFFFF, 0 0 5px #000000;
+    text-align: center;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.message-login{
+    text-decoration: none;
+    top: 5px;
+    text-align: center;
+    color: white;
+    font-weight: normal;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+.message-login:hover{
+    opacity: .8;
+}
+
+footer {
+    border-top: 1px solid #ccc;
+    padding: 5px 8px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    position: fixed;
+    float: bottom;
+    top: 92%;
+    bottom:0;
+    left:0;
+    width:100%;
+    height: 6%;
+    background-color: rgba(31,69,81,.4);
+    color: white;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 500;
+    padding: 0px;
+    margin: 0px;
+    margin-bottom: 10px
+}
+
+#login-dialog {
+    width: 260px;
+    margin: auto;
+    margin-top: 150px;
+}
+
+.grid-login {
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 8px;
+    padding: 10px;
+    width: 100%
+}
+
+@media (max-width: 640px) {
+    .ui-panelgrid.panelgrid-noborder .ui-grid-responsive .ui-grid-row {
+        border: none;
+        background: transparent !important;
+    }
+}
+
+.noborder{
+    border:none;
+    margin-top: 10px;
+    padding-top: 10px;
+    background: transparent !important;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+    border: none !important;
+    border-collapse: inherit !important;
+    padding: 4px 10px;
+}
+
+.ui-panelgrid {
+    border-collapse: inherit !important;
+}
+
+.buscador{
+    padding-left: 30%; 
+    font-size: 1.7em;
+    height: 20%;
+    margin-top: 18%;
+}
+
+.sombra{
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+    margin-bottom: 3%;
+}
+
+.toda-tela{
+    width: 100% !important;
+}
+
+.botao-salvar{
+    float: right !important;
+}
+
+#itemPanel{
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4) !important;
+    margin-bottom: 10px !important;
+}
