@@ -123,7 +123,7 @@ footer {
     margin-top: 20px;
     margin-bottom: 10px;
     position: fixed;
-    float: bottom;
+    float: right;
     top: 92%;
     bottom:0;
     left:0;
@@ -132,6 +132,8 @@ footer {
     background-color: rgba(31,69,81,.4);
     color: white;
 }
+
+
 
 h1 {
     font-size: 24px;
