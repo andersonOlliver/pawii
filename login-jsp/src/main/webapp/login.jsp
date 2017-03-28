@@ -5,8 +5,8 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List"%>
-<%@page import="model.Login"%>
-<%@page import="model.User" %>
+<%@page import="com.olliver.dao.UsuarioDAO"%>
+<%@page import="com.olliver.model.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,16 +18,16 @@
     <body>
         <div class="box box2">
             <%
-                User user = new User();
-                List<User> users = Login.getUsers();
-                user.setLogin(request.getParameter("txtLogin"));
-                user.setPassword(request.getParameter("txPassword"));
+                Usuario usuario = new Usuario();
+                List<Usuario> usuarios = UsuarioDAO.todos();
+                usuario.setLogin(request.getParameter("txtLogin"));
+                usuario.setPassword(request.getParameter("txPassword"));
 
-                if (users.contains(user)) {
-                    User aux = users.get(users.indexOf(user));
+                if (usuarios.contains(usuario)) {
+                    Usuario aux = usuarios.get(usuarios.indexOf(usuario));
 
-                    if (aux.getPassword().equals(user.getPassword())) {
-                        session.setAttribute("user", user.getLogin());
+                    if (aux.getPassword().equals(usuario.getPassword())) {
+                        session.setAttribute("usuario", usuario.getLogin());
                         response.sendRedirect("success.jsp");
                     } else {
                         out.println("senha incorreta <a href='index.jsp'>tentar novamente</a>");

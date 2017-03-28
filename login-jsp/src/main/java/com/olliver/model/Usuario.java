@@ -3,9 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package com.olliver.model;
 
+import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
@@ -13,25 +19,35 @@ import java.util.Objects;
  * @version 1.0
  * @since 1.0
  */
-public class User {
+@Table(name="usuario")
+@Entity
+public class Usuario implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue
     private int id;
+
+    @Column(length = 50, nullable = false, unique = true)
     private String login;
+    
+    @Column(length = 50, nullable = false)
     private String password;
 
-    public User() {
+    public Usuario() {
     }
 
-    public User(String login) {
+    public Usuario(String login) {
         this.login = login;
     }
 
-    public User(String login, String password) {
+    public Usuario(String login, String password) {
         this.login = login;
         this.password = password;
     }
 
-    public User(int id, String login, String password) {
+    public Usuario(int id, String login, String password) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -79,7 +95,7 @@ public class User {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final User other = (User) obj;
+        final Usuario other = (Usuario) obj;
         if (!Objects.equals(this.login, other.login)) {
             return false;
         }
@@ -88,7 +104,7 @@ public class User {
 
     @Override
     public String toString() {
-        return id + " " +login;
+        return id + " " + login;
     }
 
 }

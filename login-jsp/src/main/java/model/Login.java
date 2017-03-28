@@ -5,9 +5,10 @@
  */
 package model;
 
+import com.olliver.model.Usuario;
 import java.util.ArrayList;
 import java.util.List;
-import model.User;
+
 
 /**
  *
@@ -17,22 +18,22 @@ import model.User;
  */
 public abstract class Login {
 
-    private static List<User> users;
+    private static List<Usuario> users;
 
-    public static User getUser(String login) {
+    public static Usuario getUsuario(String login) {
         System.out.println(login);
-        User aux = new User(login);
+        Usuario aux = new Usuario(login);
         if (users.contains(aux)) {
             return users.get(users.indexOf(aux));
         }
         return null;
     }
 
-    public static List<User> getUsers() {
+    public static List<Usuario> getUsuarios() {
         users = new ArrayList<>();
-        users.add(new User(1, "admin", "123"));
-        users.add(new User(2, "root", "root"));
-        users.add(new User(3, "dafault", "dafault"));
+        users.add(new Usuario(1, "admin", "123"));
+        users.add(new Usuario(2, "root", "root"));
+        users.add(new Usuario(3, "dafault", "dafault"));
         return users;
     }
 

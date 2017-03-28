@@ -5,8 +5,8 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="model.User"%>
-<%@page import="model.Login"%>
+<%@page import="com.olliver.dao.UsuarioDAO"%>
+<%@page import="com.olliver.model.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -18,18 +18,18 @@
     </head>
     <body>
         <%
-            List<User> users = Login.getUsers();
-            request.setAttribute("userList", users);
-            User user = new User();
+            List<Usuario> usuarios = UsuarioDAO.todos();
+            request.setAttribute("usuarioList", usuarios);
+            Usuario usuario = new Usuario();
             try {
-                user = Login.getUser(session.getAttribute("user").toString());
+                usuario = UsuarioDAO.entrar(session.getAttribute("usuario").toString());
             } catch (Exception e) {
             }
         %>
         <c:choose>
-            <c:when test="${not empty user}" >
+            <c:when test="${not empty usuario}" >
                 <div class="box box2">
-                    <h1>#<%= user.getId() + " " + user.getLogin()%> </h1> 
+                    <h1>#<%= usuario.getId() + " " + usuario.getLogin()%> </h1> 
                     <h2>Seja bem vindo</h2>
                     <a href='logout.jsp'>Sair</a>
                     <table>
@@ -40,7 +40,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="item" items="${userList}">
+                            <c:forEach var="item" items="${usuarioList}">
                                 <tr>
                                     <td><c:out value="${item.id}" /></td>
                                     <td><c:out value="${item.login}" /></td>
