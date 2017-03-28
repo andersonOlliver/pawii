@@ -12,52 +12,71 @@
         </f:facet>
         <title><ui:insert name="titulo">Sistema Finanças</ui:insert></title>
 
-        <h:outputStylesheet library="olliver/css" name="estilo-com-acesso.css" />
+        <!--<h:outputStylesheet library="olliver/css" name="estilo-com-acesso.css" />-->
 
 
 
-        <h:outputStylesheet library="olliver/css" name="custom.css" />
-        <h:outputStylesheet library="olliver/css" name="layout.css" />
-        <h:outputStylesheet library="olliver/css" name="components.css" />
+        <h:outputStylesheet library="olliver/css" name="reset.css" />
+        <h:outputStylesheet library="olliver/css" name="style.css" />
 
-        <h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />
-        <h:outputScript target="body" library="olliver" name="js/app.js" />
+        <!--<h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />-->
+        <h:outputScript library="olliver/js" name="modernizr.js" />
 
         <link href="../resources/olliver/imagens/pie-chart.png" rel="shortcut icon" /> 
     </h:head>
 
     <h:body>
-        <header class="aw-topbar">
-            <h:graphicImage library="olliver/imagens" name="GestorPessoal.png" />
+        <header class="cd-main-header">
+            <h:graphicImage class="cd-logo" library="olliver/imagens" name="GestorPessoal.png" />
 
-            <a href="#" class="aw-toggle  js-toggle"><i class="fa  fa-bars"></i></a>
+            <a href="#0" class="cd-nav-trigger">Menu<span></span></a>
+
+            <nav class="cd-nav">
+                <ul class="cd-top-nav">
+                    <li><a href="#0">Tour</a></li>
+                    <li><a href="#0">Support</a></li>
+                    <li class="has-children account">
+                        <a href="#0">
+                            <h:graphicImage class="cd-logo" library="olliver/imagens" name="user.png" alt="Avatar" />
+                            <h:outputText value="#{loginBean.usuario.nome}" />
+                        </a>
+
+                        <ul>
+                            <li><a href="#0">Meu Perfil</a></li>
+                            <li><a href="#0">Editar Perfil</a></li>
+                            <li><p:commandLink action="#{loginBean.logout}" ><i class="fa  fa-fw  fa-sign-out">Sair</i></p:commandLink></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
         </header>
+        <main class="cd-main-content">
+            <nav class="cd-side-nav">
+                <ul>
+                    <li class="cd-label">Main</li>
+                    <li class="has-children overview">
+                        <a href="#0">Visão Geral</a>
+                    </li>
+                    <li class="has-children notifications active">
+                        <a href="#0">Notifications<span class="count">3</span></a>
+                    </li>
+                    <li class="has-children comments">
+                        <a href="#0">Top despesas</a>
+                    </li>
+                </ul>
+            </nav>
 
-        <h:form>
-            <p:menubar style="margin-top: -20px; margin-bottom: 20px">
-                <p:submenu label="Cadastros">
-                    <p:menuitem value="Pessoa" />
-                    <p:menuitem value="Lançamento" action="/CadastroLancamento?faces-redirect=true" />
-                </p:submenu>
-                <p:submenu label="Consultas">
-                    <p:menuitem value="Pessoas" />
-                    <p:menuitem value="Lançamentos" action="/ConsultaLancamentos?faces-redirect=true" />
-                </p:submenu>
-                <p:submenu label="Sistema">
-                    <p:menuitem value="Sair" action="#{loginBean.logout}" />
-                </p:submenu>
-            </p:menubar>
-        </h:form>
+            <!-- CONTEUDO AQUI -->
+            <div class="content-wrapper">
+                <ui:insert name="corpo" />
+            </div> 
+            <!-- FIM CONTEUDO -->
+        </main> 
 
-        <aside class="aw-sidebar  js-sidebar">
-            <ui:include src="Menu.xhtml" />
-        </aside>
+        <footer> Finanças - Desenvolvido por Anderson Oliveira Santos </footer>
 
-        <section class="aw-content  js-content">
-            <ui:insert name="corpo" />
-        </section>
-
-        <footer id="foot"><p> Finanças - Desenvolvido por Anderson Oliveira Santos </p></footer>
-
+        <h:outputScript target="body" library="olliver" name="js/jquery-2.1.4.js" />
+        <h:outputScript target="body" library="olliver" name="js/jquery.menu-aim.js" />
+        <h:outputScript target="body" library="olliver" name="js/main.js" />
     </h:body>
 </html>

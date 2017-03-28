@@ -10,8 +10,6 @@ import com.olliver.financas.service.ConsultaLogin;
 import com.olliver.financas.service.NegocioException;
 import com.olliver.financas.util.jsf.FacesUtil;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;

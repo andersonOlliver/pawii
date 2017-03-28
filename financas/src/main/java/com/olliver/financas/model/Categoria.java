@@ -12,15 +12,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
- * @author olliver
+ * @author TABA - http://ceda.ic.ufmt.br
+ * @version 1.0
+ * @since 1.0
  */
-@Table(name = "licenca")
+@Table(name = "categoria")
 @Entity
-public class Licenca implements Serializable {
+public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,13 +29,8 @@ public class Licenca implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @NotEmpty
-    @Column(length = 20000, nullable = false)
-    private String termo;
-    
-    @NotEmpty
-    @Column(length = 50, nullable = false, unique = true)
-    private String regiao;
+    @Column(name = "descricao", nullable = false, unique = true)
+    private String descricao;
 
     public Long getId() {
         return id;
@@ -44,26 +40,19 @@ public class Licenca implements Serializable {
         this.id = id;
     }
 
-    public String getTermo() {
-        return termo;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setTermo(String termo) {
-        this.termo = termo;
-    }
-
-    public String getRegiao() {
-        return regiao;
-    }
-
-    public void setRegiao(String regiao) {
-        this.regiao = regiao;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 47 * hash + Objects.hashCode(this.id);
+        hash = 47 * hash + Objects.hashCode(this.descricao);
         return hash;
     }
 
@@ -78,7 +67,10 @@ public class Licenca implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Licenca other = (Licenca) obj;
+        final Categoria other = (Categoria) obj;
+        if (!Objects.equals(this.descricao, other.descricao)) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
@@ -87,7 +79,8 @@ public class Licenca implements Serializable {
 
     @Override
     public String toString() {
-        return "Licenca{" + "id=" + id + ", termo=" + termo + ", regiao=" + regiao + '}';
+        return "Categoria{" + "id=" + id + ", descricao=" + descricao + '}';
     }
-
+    
+    
 }

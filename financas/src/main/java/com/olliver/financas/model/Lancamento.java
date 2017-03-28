@@ -14,6 +14,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -40,6 +42,15 @@ public class Lancamento implements Serializable {
     
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
+    
+    @ManyToOne
+    @JoinColumn(name="usuario") 
+    private Usuario usuario;
+    
+    @ManyToOne
+    @JoinColumn(name="categoria") 
+    private Categoria categoria;
+        
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -100,6 +111,23 @@ public class Lancamento implements Serializable {
         this.tipo = tipo;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -127,7 +155,9 @@ public class Lancamento implements Serializable {
 
     @Override
     public String toString() {
-        return "Lancamento{" + "id=" + id + ", valor=" + valor + ", descricao=" + descricao + ", dataCadastro=" + dataCadastro + ", tipo=" + tipo + '}';
+        return "Lancamento{" + "id=" + id + ", valor=" + valor + ", descricao=" + descricao + ", dataCadastro=" + dataCadastro + ", usuario=" + usuario + ", categoria=" + categoria + ", tipo=" + tipo + '}';
     }
+
+    
     
 }

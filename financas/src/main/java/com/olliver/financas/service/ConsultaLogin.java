@@ -9,6 +9,7 @@ import com.olliver.financas.model.Usuario;
 import com.olliver.financas.repository.Usuarios;
 import java.io.Serializable;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -22,16 +23,20 @@ public class ConsultaLogin implements Serializable {
     private Usuarios usuarios;
 
     public Usuario login(String email, String senha) throws NegocioException {
-        if(!email.isEmpty()){
-            Usuario aux = usuarios.porEmail(email);
-            if(aux == null){
+        if (!email.isEmpty()) {
+            try {
+                Usuario aux = usuarios.porEmail(email);
+                if (aux == null) {
+                    throw new NegocioException("Não encontrado!");
+                } else if (aux.getSenha().equals(senha)) {
+                    return aux;
+                } else {
+                    throw new NegocioException("Senha não confere!");
+                }
+            } catch (NoResultException nre) {
                 throw new NegocioException("Não encontrado!");
-            }else if(aux.getSenha().equals(senha)){
-                return aux;
-            }else{
-                throw new NegocioException("Senha não confere!");
             }
-        }else{
+        } else {
             throw new NegocioException("Email inválido!");
         }
     }

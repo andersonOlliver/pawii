@@ -5,7 +5,9 @@
  */
 package com.olliver.financas.controller;
 
+import com.olliver.financas.model.Licenca;
 import com.olliver.financas.model.Usuario;
+import com.olliver.financas.repository.Licencas;
 import com.olliver.financas.service.CadastroUsuario;
 import com.olliver.financas.service.NegocioException;
 import com.olliver.financas.util.jsf.FacesUtil;
@@ -27,9 +29,12 @@ public class CadastroUsuarioBean implements Serializable {
 
     @Inject
     private CadastroUsuario cadastro;
-    
+    @Inject
+    private Licencas licencaRepositorio;
+
     private Usuario usuario;
-    
+    private Licenca licenca;
+
     @NotEmpty
     private String confimaSenha;
     private String labelAceite;
@@ -37,19 +42,23 @@ public class CadastroUsuarioBean implements Serializable {
 
     public void inicializar() {
         this.usuario = new Usuario();
+        this.licenca = licencaRepositorio.porId(1L);
         this.labelAceite = "Li e concordo com os termos de uso";
         this.textoLicença = "asdfkljaçsl fkjasçl fjasflkjsafkjasçlfjasçlfk jçslfd jsaça lksjfçlask jfçsk dfja fkjsaçfk jsaflkjsadçlf kjsçflkasjç askjfç sakdjf sakljfçlsak jaçslf jasçlkfj saçdlkfj asçlkfjasçldfj asçlkf jasçfkljsaçf kjsadçfl asjfçlkaj çlj çlsjf çl";
     }
 
     public void salvar() {
         try {
+            if (usuario.isAceite()) {
+                usuario.setLicenca(licenca);
+            }
             this.cadastro.salvar(usuario, confimaSenha);
             FacesUtil.addInfoMessage("Cadastro realizado com sucesso!");
         } catch (NegocioException ex) {
             FacesUtil.addErrorMessage(ex.getMessage());
         }
         System.out.println("Salvo usuario = " + usuario);
-    }    
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -74,6 +83,9 @@ public class CadastroUsuarioBean implements Serializable {
     public void setConfimaSenha(String confimaSenha) {
         this.confimaSenha = confimaSenha;
     }
-    
+
+    public Licenca getLicenca() {
+        return licenca;
+    }
 
 }

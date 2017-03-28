@@ -25,7 +25,7 @@
 
                         <p:outputLabel value="Nascimento" for="datanascimento"/>
                         <p:calendar id="datanascimento" value="#{cadastroUsuarioBean.usuario.dataNascimento}"
-                                    required="true" title="Data nascimento" navigator="true" 
+                                    required="true" title="Data de Nascimento" navigator="true" 
                                     mask="true" pattern="dd/MM/yyyy"/>
 
                         <p:outputLabel value="Email:" for="email" />
@@ -48,17 +48,19 @@
                             <p:selectBooleanCheckbox id="aceite" value="#{cadastroUsuarioBean.usuario.aceite}"
                                                      required="true" label="Termo de uso"/>
                             <p:spacer width="5px" />
-                            <p:commandLink onclick="PF('dlg').show()" process="@this">
-                                <p:outputLabel value="#{cadastroUsuarioBean.labelAceite}" />
+                            <p:commandLink onclick="PF('dlg').show()" process="@this" >
+                                <p:outputLabel value="#{cadastroUsuarioBean.labelAceite}"  />
                             </p:commandLink>
                         </h:panelGroup>
 
                         <p:commandButton value="Começar a usar" action="#{cadastroUsuarioBean.salvar()}"/>
                     </p:panelGrid>
 
-                    <p:dialog header="Dynamic Focus" widgetVar="dlg" responsive="true"
-                              resizable="false" style="min-width: 300px">
-                        <h:outputText value="#{cadastroUsuarioBean.textoLicença}" />
+                    <p:dialog header="Termo de licença de uso do software" footer="GestorPessoal"
+                              widgetVar="dlg" responsive="true" 
+                              modal="true" closeOnEscape="true" height="500px"
+                              resizable="false" style="min-width: 300px; max-width: 600px">
+                        <h:outputText escape="false" value="#{cadastroUsuarioBean.licenca.termo}" />
                     </p:dialog>
                 </h:form>
                 <p:link class="message-login" outcome="entrar" value=">> Já sou cadastrado. Quero fazer login" />
