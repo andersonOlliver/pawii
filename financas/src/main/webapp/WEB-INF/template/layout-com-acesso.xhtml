@@ -12,14 +12,9 @@
         </f:facet>
         <title><ui:insert name="titulo">Sistema Finanças</ui:insert></title>
 
-        <!--<h:outputStylesheet library="olliver/css" name="estilo-com-acesso.css" />-->
-
-
-
         <h:outputStylesheet library="olliver/css" name="reset.css" />
         <h:outputStylesheet library="olliver/css" name="style.css" />
-
-        <!--<h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />-->
+        <h:outputStylesheet library="olliver/css" name="components.css" />
         <h:outputScript library="olliver/js" name="modernizr.js" />
 
         <link href="../resources/olliver/imagens/pie-chart.png" rel="shortcut icon" /> 
@@ -30,25 +25,28 @@
             <h:graphicImage class="cd-logo" library="olliver/imagens" name="GestorPessoal.png" />
 
             <a href="#0" class="cd-nav-trigger">Menu<span></span></a>
+            <h:form>
+                <nav class="cd-nav">
+                    <ul class="cd-top-nav">
+                        <li><a href="#0">Tour</a></li>
+                        <li><a href="#0">Support</a></li>
+                        <li class="has-children account">
+                            <a href="#0">
+                                <h:graphicImage class="cd-logo" library="olliver/imagens" name="user.png" alt="Avatar" />
+                                <h:outputText value="#{loginBean.usuario.nome}" />
+                            </a>
 
-            <nav class="cd-nav">
-                <ul class="cd-top-nav">
-                    <li><a href="#0">Tour</a></li>
-                    <li><a href="#0">Support</a></li>
-                    <li class="has-children account">
-                        <a href="#0">
-                            <h:graphicImage class="cd-logo" library="olliver/imagens" name="user.png" alt="Avatar" />
-                            <h:outputText value="#{loginBean.usuario.nome}" />
-                        </a>
-
-                        <ul>
-                            <li><a href="#0">Meu Perfil</a></li>
-                            <li><a href="#0">Editar Perfil</a></li>
-                            <li><p:commandLink action="#{loginBean.logout}" ><i class="fa  fa-fw  fa-sign-out">Sair</i></p:commandLink></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
+                            <ul>
+                                <li><a href="#0">Meu Perfil</a></li>
+                                <li><a href="#0">Editar Perfil</a></li>
+                                <li>
+                                    <p:commandLink action="#{loginBean.logout}" shape="circle"><i class="fa  fa-fw  fa-sign-out"> Sair</i></p:commandLink>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </h:form>
         </header>
         <main class="cd-main-content">
             <nav class="cd-side-nav">
@@ -75,7 +73,7 @@
 
         <footer> Finanças - Desenvolvido por Anderson Oliveira Santos </footer>
 
-        <h:outputScript target="body" library="olliver" name="js/jquery-2.1.4.js" />
+        <!--<h:outputScript target="body" library="olliver" name="js/jquery-2.1.4.js" />-->
         <h:outputScript target="body" library="olliver" name="js/jquery.menu-aim.js" />
         <h:outputScript target="body" library="olliver" name="js/main.js" />
     </h:body>

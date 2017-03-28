@@ -6,6 +6,7 @@
 package com.olliver.financas.controller;
 
 import com.olliver.financas.model.Lancamento;
+import com.olliver.financas.model.TipoLancamento;
 import com.olliver.financas.repository.Lancamentos;
 import com.olliver.financas.service.CadastroLancamento;
 import com.olliver.financas.service.NegocioException;
@@ -63,6 +64,9 @@ public class GerenciaLancamentoBean implements Serializable {
     }
 
     //GETTER SETTER
+    public TipoLancamento[] getTipos(){
+        return TipoLancamento.values();
+    }
     public List<Lancamento> getLancamentos() {
         return lancamentos;
     }

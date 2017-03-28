@@ -7,7 +7,100 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="corpo">
-        
-        
+        <h:form>
+            <p:breadCrumb >
+                <p:menuitem value="Início" url="#"/>
+                <p:menuitem value="Lançamentos" url="#"/>
+            </p:breadCrumb>
+        </h:form>
+
+        <p:growl autoUpdate="true"/>
+        <p:tooltip />
+
+        <h1><h:outputText value="Lançamentos"/></h1>
+        <h:form id="frm">
+
+            <p:toolbar>
+                <p:toolbarGroup>
+                    <p:commandButton value="Novo" action="#{gerenciaLancamentoBean.novoItem()}"
+                                     title="Criar novo lançamento " 
+                                     oncomplete="PF('cadastroLancamento').show();"
+                                     process="@this" update="linePanel">
+                        <p:resetInput target="linePanel" />
+                    </p:commandButton>
+                </p:toolbarGroup>
+
+                <p:toolbarGroup align="right">
+                    <p:calendar id="inicio-pesquisa" placeholder="De" />
+                    <p:spacer width="5px"/>
+                    <p:calendar id="fim-pesquisa" placeholder="Até"/>
+                </p:toolbarGroup>
+            </p:toolbar>
+
+            <p:dataTable value="#{gerenciaLancamentoBean.lancamentos}" var="item"
+                         emptyMessage="Nenhum dado para esse período">
+
+                <p:column headerText="Valor">
+                    <h:outputText value="#{item.valor}"/>
+                </p:column>
+
+                <p:column headerText="Descrição">
+                    <h:outputText value="#{item.descricao}"/>
+                </p:column>
+
+                <p:column headerText="Data">
+                    <h:outputText value="#{item.dataCadastro}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Tipo">
+                    <h:outputText value="#{item.tipo}"/>
+                </p:column>
+
+                <p:column headerText="Categoria">
+                    <h:outputText value="#{item.categoria}"/>
+                </p:column>
+            </p:dataTable>
+
+            <p:dialog widgetVar="cadastroLancamento" header="Novo Lançamento"
+                      responsive="true" modal="true" closeOnEscape="true"
+                      resizable="false" style="min-width: 300px">
+
+                <h:panelGroup id="linePanel" layout="block">
+                    <p:messages id="msgDialog" autoUpdate="false" />
+
+                    <p:panelGrid columns="2" layout="grid" styleClass="panelgrid-noborder ui-fluid">
+
+                        <p:outputLabel value="Valor:" for="valor" />
+                        <p:inputNumber id="valor" value="#{gerenciaLancamentoBean.lancamento.valor}" 
+                                       title="Valor" />
+
+                        <p:outputLabel value="Data:" for="dataCadastro" />
+                        <p:calendar id="dataCadastro" value="#{gerenciaLancamentoBean.lancamento.dataCadastro}"
+                                    title="Data" required="true" navigator="true" 
+                                    mask="true" pattern="dd/MM/yyyy" />
+
+                        <p:outputLabel value="Tipo:" for="tipo" />
+                        <p:inputText id="tipo" value="#{gerenciaLancamentoBean.lancamento.tipo}" title="Tipo" required="true" requiredMessage="The Tipo field is required."/>
+
+                        <p:outputLabel value="Categoria:" for="categoria" />
+                        <p:selectOneMenu id="categoria" value="#{gerenciaLancamentoBean.lancamento.categoria}" >
+                            <!-- TODO: update below reference to list of available items-->
+                            <f:selectItems value="#{fixme}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Descricao:" for="descricao" />
+                        <p:inputText id="descricao" value="#{gerenciaLancamentoBean.lancamento.descricao}" 
+                                     title="Descrição" />
+                        
+<!--                        <p:outputLabel/>
+                        -->
+                    </p:panelGrid>
+                    <p:commandButton value="Salvar" style="float: right; margin: 5px"/>
+                </h:panelGroup>
+            </p:dialog>
+        </h:form>
+
     </ui:define>
 </ui:composition>

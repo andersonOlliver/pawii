@@ -1,0 +1,13 @@
+@charset "utf-8";
+
+body .ui-growl {
+    top: 75px !important;
+/*    background-color: #2f8ee5;
+    border-color: #2f8ee5;
+    color: #ffffff;*/
+}
+
+.ui-toolbar {
+     padding: 5px !important;
+     max-height: 42px;
+}
