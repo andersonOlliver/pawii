@@ -27,7 +27,7 @@ public class Usuarios implements Serializable {
     }
 
     public Usuario porEmail(String email) {
-        Query query = manager.createQuery("select u from Usuario u where u.email=:email", Usuario.class);
+        Query query = manager.createQuery("select u from Usuario u INNER JOIN FETCH u.licenca where u.email=:email", Usuario.class);
         query.setParameter("email", email);
         return (Usuario) query.getSingleResult();
     }

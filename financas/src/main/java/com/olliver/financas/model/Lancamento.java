@@ -57,6 +57,7 @@ public class Lancamento implements Serializable {
     private TipoLancamento tipo;
 
     public Lancamento() {
+//        this.tipo = TipoLancamento.DESPESA;
     }
 
     public Lancamento(Long id) {

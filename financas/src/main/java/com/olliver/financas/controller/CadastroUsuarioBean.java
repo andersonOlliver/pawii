@@ -31,6 +31,8 @@ public class CadastroUsuarioBean implements Serializable {
     private CadastroUsuario cadastro;
     @Inject
     private Licencas licencaRepositorio;
+    @Inject
+    private LoginBean autenticacao;
 
     private Usuario usuario;
     private Licenca licenca;
@@ -44,20 +46,27 @@ public class CadastroUsuarioBean implements Serializable {
         this.usuario = new Usuario();
         this.licenca = licencaRepositorio.porId(1L);
         this.labelAceite = "Li e concordo com os termos de uso";
-        this.textoLicença = "asdfkljaçsl fkjasçl fjasflkjsafkjasçlfjasçlfk jçslfd jsaça lksjfçlask jfçsk dfja fkjsaçfk jsaflkjsadçlf kjsçflkasjç askjfç sakdjf sakljfçlsak jaçslf jasçlkfj saçdlkfj asçlkfjasçldfj asçlkf jasçfkljsaçf kjsadçfl asjfçlkaj çlj çlsjf çl";
+        
     }
 
-    public void salvar() {
+    public String salvar() {
         try {
             if (usuario.isAceite()) {
                 usuario.setLicenca(licenca);
             }
             this.cadastro.salvar(usuario, confimaSenha);
-            FacesUtil.addInfoMessage("Cadastro realizado com sucesso!");
+            return this.entrar();
+//            FacesUtil.addInfoMessage("Cadastro realizado com sucesso!");
         } catch (NegocioException ex) {
             FacesUtil.addErrorMessage(ex.getMessage());
         }
-        System.out.println("Salvo usuario = " + usuario);
+        return null;
+    }
+
+    private String entrar() {
+        this.autenticacao.setEmail(usuario.getEmail());
+        this.autenticacao.setSenha(usuario.getSenha());
+        return this.autenticacao.entrar();
     }
 
     public Usuario getUsuario() {

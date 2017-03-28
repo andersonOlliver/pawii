@@ -71,4 +71,8 @@ public class LoginBean implements Serializable {
         return usuario;
     }
 
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
 }

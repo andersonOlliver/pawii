@@ -6,6 +6,10 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
 
+    <f:metadata>
+        <f:viewAction action="#{gerenciaLancamentoBean.inicializar()}"/>
+    </f:metadata>
+
     <ui:define name="corpo">
         <h:form>
             <p:breadCrumb >
@@ -20,6 +24,7 @@
         <h1><h:outputText value="Lançamentos"/></h1>
         <h:form id="frm">
 
+
             <p:toolbar>
                 <p:toolbarGroup>
                     <p:commandButton value="Novo" action="#{gerenciaLancamentoBean.novoItem()}"
@@ -31,17 +36,29 @@
                 </p:toolbarGroup>
 
                 <p:toolbarGroup align="right">
-                    <p:calendar id="inicio-pesquisa" placeholder="De" />
-                    <p:spacer width="5px"/>
-                    <p:calendar id="fim-pesquisa" placeholder="Até"/>
+                    <h:panelGroup>
+                        <p:calendar size="10" pattern="dd/MM/yyyy" 
+                                    value="#{gerenciaLancamentoBean.inicio}">
+                            <p:ajax event="dateSelect" listener="#{gerenciaLancamentoBean.consultar()}" update="tableData" />
+                        </p:calendar>
+                        <!--<p:spacer width="5px"/>-->
+                        a
+                        <p:calendar size="10" pattern="dd/MM/yyyy" 
+                                    value="#{gerenciaLancamentoBean.fim}">
+                            <p:ajax event="dateSelect" listener="#{gerenciaLancamentoBean.consultar()}" update="tableData" />
+                        </p:calendar>
+                    </h:panelGroup>
                 </p:toolbarGroup>
             </p:toolbar>
 
-            <p:dataTable value="#{gerenciaLancamentoBean.lancamentos}" var="item"
-                         emptyMessage="Nenhum dado para esse período">
+            <p:dataTable id="tableData" value="#{gerenciaLancamentoBean.lancamentos}" var="item"
+                         emptyMessage="Nenhum dado para esse período" reflow="true"
+                         rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 
-                <p:column headerText="Valor">
-                    <h:outputText value="#{item.valor}"/>
+                <p:column headerText="Valor" >
+                    <h:outputText  value="#{item.valor}" style="float: right">
+                        <f:convertNumber type="currency"/>
+                    </h:outputText>
                 </p:column>
 
                 <p:column headerText="Descrição">
@@ -55,11 +72,26 @@
                 </p:column>
 
                 <p:column headerText="Tipo">
-                    <h:outputText value="#{item.tipo}"/>
+                    <h:outputText value="#{item.tipo.descrição}"/>
                 </p:column>
 
                 <p:column headerText="Categoria">
-                    <h:outputText value="#{item.categoria}"/>
+                    <h:outputText value="#{item.categoria.descricao}"/>
+                </p:column>
+
+                <p:column width="140" style="text-align: center">
+                    <p:commandButton icon="ui-icon-pencil" title="Editar" process="@this" update=":frm:linePanel"
+                                     action="#{gerenciaLancamentoBean.editar(item)}" oncomplete="PF('cadastroLancamento').show()">
+                        <f:setPropertyActionListener value="#{lancamento}" 
+                                                     target="#{gerenciaLancamentoBean.lancamento}" />
+                    </p:commandButton>
+
+                    <p:commandButton icon="ui-icon-trash" title="Excluir" process="@this" update="@form"
+                                     action="#{gerenciaLancamentoBean.excluir}">
+                        <f:setPropertyActionListener value="#{lancamento}" 
+                                                     target="#{gerenciaLancamentoBean.lancamento}" />
+                    </p:commandButton>
+
                 </p:column>
             </p:dataTable>
 
@@ -70,11 +102,11 @@
                 <h:panelGroup id="linePanel" layout="block">
                     <p:messages id="msgDialog" autoUpdate="false" />
 
-                    <p:panelGrid columns="2" layout="grid" styleClass="panelgrid-noborder ui-fluid">
+                    <p:panelGrid columns="1" layout="grid" styleClass="panelgrid-noborder ui-fluid">
 
                         <p:outputLabel value="Valor:" for="valor" />
                         <p:inputNumber id="valor" value="#{gerenciaLancamentoBean.lancamento.valor}" 
-                                       title="Valor" />
+                                       required="true" title="Valor" />
 
                         <p:outputLabel value="Data:" for="dataCadastro" />
                         <p:calendar id="dataCadastro" value="#{gerenciaLancamentoBean.lancamento.dataCadastro}"
@@ -82,22 +114,31 @@
                                     mask="true" pattern="dd/MM/yyyy" />
 
                         <p:outputLabel value="Tipo:" for="tipo" />
-                        <p:inputText id="tipo" value="#{gerenciaLancamentoBean.lancamento.tipo}" title="Tipo" required="true" requiredMessage="The Tipo field is required."/>
+                        <p:selectOneButton id="tipo" value="#{gerenciaLancamentoBean.lancamento.tipo}"
+                                           required="true">
+                            <f:selectItems value="#{gerenciaLancamentoBean.tipos}" var="tipo" 
+                                           itemLabel="#{tipo.descrição}" itemValue="#{tipo}"/>
+                        </p:selectOneButton>
 
                         <p:outputLabel value="Categoria:" for="categoria" />
                         <p:selectOneMenu id="categoria" value="#{gerenciaLancamentoBean.lancamento.categoria}" >
                             <!-- TODO: update below reference to list of available items-->
-                            <f:selectItems value="#{fixme}"/>
+                            <f:selectItem noSelectionOption="true" itemLabel="Selecione"/>
+                            <f:selectItems value="#{gerenciaLancamentoBean.categorias}" var="categoria"
+                                           itemLabel="#{categoria.descricao}" itemValue="#{categoria}"/>
                         </p:selectOneMenu>
 
                         <p:outputLabel value="Descricao:" for="descricao" />
-                        <p:inputText id="descricao" value="#{gerenciaLancamentoBean.lancamento.descricao}" 
-                                     title="Descrição" />
-                        
-<!--                        <p:outputLabel/>
-                        -->
+                        <p:inputTextarea id="descricao" value="#{gerenciaLancamentoBean.lancamento.descricao}" 
+                                         title="Descrição" />
+
+
                     </p:panelGrid>
-                    <p:commandButton value="Salvar" style="float: right; margin: 5px"/>
+                    <p:commandButton value="Salvar" action="#{gerenciaLancamentoBean.salvar()}"
+                                     icon="fa fa-save" resetValues="true" 
+                                     process="linePanel" update="linePanel :frm:tableData msgDialog"
+                                     oncomplete="if (!args.validationFailed) PF('cadastroLancamento').hide()"
+                                     style="float: right; margin: 5px"/>
                 </h:panelGroup>
             </p:dialog>
         </h:form>
