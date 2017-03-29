@@ -16,13 +16,13 @@ import com.olliver.financas.util.date.DateUtils;
 import com.olliver.financas.util.jsf.FacesUtil;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.model.chart.MeterGaugeChartModel;
 
 /**
  *
@@ -48,18 +48,48 @@ public class GerenciaLancamentoBean implements Serializable {
     private List<Lancamento> lancamentos;
     private List<Categoria> categorias;
     private Lancamento lancamento;
-
     private Date inicio;
     private Date fim;
+    private Double saldo;
+    private Double gasto;
+    private MeterGaugeChartModel graficoGauge;
+
+    private void inicializarGrafico() {
+        this.graficoGauge = this.inicializarValoresGrafico();
+        graficoGauge.setSeriesColors("66cc66,93b75f,E7E658,cc6666,cc3535");
+        graficoGauge.setGaugeLabel("R$");
+        graficoGauge.setGaugeLabelPosition("bottom");
+        graficoGauge.setShowTickLabels(true);
+    }
+
+    private MeterGaugeChartModel inicializarValoresGrafico() {
+        List<Number> intervalos = new ArrayList<Number>() {
+            {
+                add(saldo * 0.2);
+                add(saldo * 0.4);
+                add(saldo * 0.6);
+                add(saldo * 0.8);
+                add(saldo);
+            }
+        };
+        return new MeterGaugeChartModel(gasto, intervalos);
+    }
 
     public void inicializar() {
         this.novoItem();
         this.setDefault();
+        this.consultarSituacao();
         this.consultar();
     }
 
     public void consultar() {
         this.lancamentos = repositorioLancamento.periodo(inicio, fim, autenticacao.getUsuario());
+    }
+
+    private void consultarSituacao() {
+        this.saldo = this.repositorioLancamento.situacao(inicio, fim, autenticacao.getUsuario(), TipoLancamento.RECEITA);
+        this.gasto = this.repositorioLancamento.situacao(inicio, fim, autenticacao.getUsuario(), TipoLancamento.DESPESA);
+        this.inicializarGrafico();
     }
 
     public void salvar() {
@@ -71,6 +101,7 @@ public class GerenciaLancamentoBean implements Serializable {
             cadastro.salvar(lancamento);
             this.novoItem();
             this.consultar();
+            this.consultarSituacao();
             FacesUtil.addInfoMessage("Lançamento inserido com sucesso!");
         } catch (NegocioException ex) {
             FacesUtil.addErrorMessage(ex.getMessage());
@@ -81,6 +112,7 @@ public class GerenciaLancamentoBean implements Serializable {
         try {
             this.cadastro.excluir(lancamento);
             this.consultar();
+            this.consultarSituacao();
             FacesUtil.addInfoMessage("Removido com sucesso!");
         } catch (NegocioException ex) {
             FacesUtil.addErrorMessage(ex.getMessage());
@@ -142,6 +174,18 @@ public class GerenciaLancamentoBean implements Serializable {
 
     public void setFim(Date fim) {
         this.fim = fim;
+    }
+
+    public Double getSaldo() {
+        return saldo;
+    }
+
+    public Double getGasto() {
+        return gasto;
+    }
+
+    public MeterGaugeChartModel getGraficoGauge() {
+        return graficoGauge;
     }
 
 }

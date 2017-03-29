@@ -21,8 +21,50 @@
         <p:growl autoUpdate="true"/>
         <p:tooltip />
 
+        <p:panel id="situacao">
+            <style>
+                #painel-grafico{
+                    margin: 0 auto;
+                    align-content: center;
+                }
+                #g1 {
+                    width:30%; 
+                    height: 50%;
+                    min-height: 280px;
+                    min-width: 300px;
+                    margin: 0 auto;
+                }
+            </style>
+            <script src="../resources/olliver/js/justgauge/raphael-2.1.4.min.js" type="text/javascript"></script>
+            <script src="../resources/olliver/js/justgauge/justgage.js" type="text/javascript"></script>
+            <script>
+                window.onload = function () {
+                    loadValues();
+                };
+                function loadValues() {
+                    var g1 = new JustGage({
+                        id: "g1",
+                        value: parseFloat(#{gerenciaLancamentoBean.gasto}),
+                        min: 0,
+                        relativeGaugeSize: true,
+                        counter: true,
+                        formatNumber: true,
+                        max: #{gerenciaLancamentoBean.saldo},
+                        title: "Situação Atual",
+                        label: "R$"
+                    });
+                };
+
+            </script>
+            <div id="painel-grafico">
+                <div id="g1"></div>
+            </div>
+            <p:chart type="metergauge" model="#{gerenciaLancamentoBean.graficoGauge}" />
+        </p:panel>
+
         <h1><h:outputText value="Lançamentos"/></h1>
         <h:form id="frm">
+
 
             <p:toolbar>
                 <p:toolbarGroup>
@@ -85,8 +127,8 @@
                                                      target="#{gerenciaLancamentoBean.lancamento}" />
                     </p:commandButton>
 
-                    <p:commandButton icon="ui-icon-trash" title="Excluir" process="@this" update="frm:tableData"
-                                     action="#{gerenciaLancamentoBean.excluir}">
+                    <p:commandButton icon="ui-icon-trash" title="Excluir" process="@this" update="frm:tableData situacao"
+                                     action="#{gerenciaLancamentoBean.excluir}" oncomplete="loadValues()">
                         <f:setPropertyActionListener value="#{item}" 
                                                      target="#{gerenciaLancamentoBean.lancamento}" />
                         <p:confirm header="Confirmação" message="Excluir lançamento?" icon="ui-icon-alert" />
@@ -141,11 +183,12 @@
                     </p:panelGrid>
                     <p:commandButton value="Salvar" action="#{gerenciaLancamentoBean.salvar()}"
                                      icon="fa fa-save" resetValues="true" 
-                                     process="linePanel" update="linePanel :frm:tableData msgDialog"
-                                     oncomplete="if (!args.validationFailed) PF('cadastroLancamento').hide()"
+                                     process="linePanel" update="linePanel :frm:tableData msgDialog situacao"
+                                     oncomplete="if (!args.validationFailed) PF('cadastroLancamento').hide() loadValues()"
                                      style="float: right; margin: 5px"/>
                 </h:panelGroup>
             </p:dialog>
         </h:form>
+
     </ui:define>
 </ui:composition>

@@ -6,12 +6,14 @@
 package com.olliver.financas.repository;
 
 import com.olliver.financas.model.Lancamento;
+import com.olliver.financas.model.TipoLancamento;
 import com.olliver.financas.model.Usuario;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -23,30 +25,37 @@ import javax.persistence.TypedQuery;
 public class Lancamentos implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     private EntityManager manager;
 
     @Inject
     public Lancamentos(EntityManager manager) {
         this.manager = manager;
     }
-    
+
     public Lancamento porId(Long id) {
         return manager.find(Lancamento.class, id);
     }
-    
+
     public List<Lancamento> todos() {
         return manager.createQuery("from Lancamento", Lancamento.class).getResultList();
     }
-    
-    public List<Lancamento> periodo(Date inicio, Date fim, Usuario usuario){
-        System.out.println("início = "+ inicio);
-        System.out.println("fim = "+ fim);
-        TypedQuery query = manager.createQuery("select l from Lancamento l INNER JOIN FETCH l.usuario where l.usuario=:usuario and l.dataCadastro BETWEEN :inicio and :fim", Lancamento.class);
+
+    public List<Lancamento> periodo(Date inicio, Date fim, Usuario usuario) {
+        TypedQuery query = manager.createQuery("select l from Lancamento l INNER JOIN FETCH l.categoria where l.usuario=:usuario and l.dataCadastro BETWEEN :inicio and :fim ORDER BY l.dataCadastro ASC", Lancamento.class);
         query.setParameter("usuario", usuario);
         query.setParameter("inicio", inicio);
         query.setParameter("fim", fim);
         return query.getResultList();
+    }
+
+    public Double situacao(Date inicio, Date fim, Usuario usuario, TipoLancamento tipo) {
+        Query query = manager.createQuery("select SUM(l.valor) from Lancamento l where l.usuario=:usuario and l.tipo=:tipo and l.dataCadastro BETWEEN :inicio and :fim");
+        query.setParameter("usuario", usuario);
+        query.setParameter("inicio", inicio);
+        query.setParameter("fim", fim);
+        query.setParameter("tipo", tipo);
+        return ((Number) query.getSingleResult()).doubleValue();
     }
 
     public void adicionar(Lancamento lancamento) {
