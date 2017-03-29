@@ -80,6 +80,7 @@ public class GerenciaLancamentoBean implements Serializable {
     public void excluir() {
         try {
             this.cadastro.excluir(lancamento);
+            this.consultar();
             FacesUtil.addInfoMessage("Removido com sucesso!");
         } catch (NegocioException ex) {
             FacesUtil.addErrorMessage(ex.getMessage());

@@ -42,7 +42,7 @@ public class Lancamentos implements Serializable {
     public List<Lancamento> periodo(Date inicio, Date fim, Usuario usuario){
         System.out.println("início = "+ inicio);
         System.out.println("fim = "+ fim);
-        TypedQuery query = manager.createQuery("select l from Lancamento l where l.usuario=:usuario and l.dataCadastro BETWEEN :inicio and :fim", Lancamento.class);
+        TypedQuery query = manager.createQuery("select l from Lancamento l INNER JOIN FETCH l.usuario where l.usuario=:usuario and l.dataCadastro BETWEEN :inicio and :fim", Lancamento.class);
         query.setParameter("usuario", usuario);
         query.setParameter("inicio", inicio);
         query.setParameter("fim", fim);
