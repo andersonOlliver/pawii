@@ -87,8 +87,16 @@ public class GerenciaLancamentoBean implements Serializable {
     }
 
     private void consultarSituacao() {
-        this.saldo = this.repositorioLancamento.situacao(inicio, fim, autenticacao.getUsuario(), TipoLancamento.RECEITA);
-        this.gasto = this.repositorioLancamento.situacao(inicio, fim, autenticacao.getUsuario(), TipoLancamento.DESPESA);
+        try {
+            this.saldo = this.repositorioLancamento.situacao(inicio, fim, autenticacao.getUsuario(), TipoLancamento.RECEITA);
+            this.gasto = this.repositorioLancamento.situacao(inicio, fim, autenticacao.getUsuario(), TipoLancamento.DESPESA);
+        } catch (NullPointerException ne) {
+            this.saldo = this.saldo == null ? 0 : this.saldo;
+            this.gasto = this.gasto == null ? 0 : this.gasto;
+        }
+        System.out.println("Saldo = "+saldo);
+        System.out.println("Gasto = "+gasto);
+
         this.inicializarGrafico();
     }
 
