@@ -14,6 +14,7 @@
 
         <h:outputStylesheet library="olliver/css" name="reset.css" />
         <h:outputStylesheet library="olliver/css" name="style.css" />
+        <h:outputStylesheet library="olliver/css" name="estilo.css" />
         <h:outputStylesheet library="olliver/css" name="components.css" />
         <h:outputScript library="olliver/js" name="modernizr.js" />
 
@@ -40,7 +41,7 @@
                                 <li><a href="#0">Meu Perfil</a></li>
                                 <li><a href="#0">Editar Perfil</a></li>
                                 <li>
-                                    <p:commandLink action="#{loginBean.logout}" shape="circle"><i class="fa  fa-fw  fa-sign-out"> Sair</i></p:commandLink>
+                                    <p:commandLink action="#{loginBean.logout}" shape="circle">Sair</p:commandLink>
                                 </li>
                             </ul>
                         </li>
@@ -52,10 +53,10 @@
             <nav class="cd-side-nav">
                 <ul>
                     <li class="cd-label">Main</li>
-                    <li class="has-children overview">
+                    <li class="has-children overview active">
                         <a href="#0">Visão Geral</a>
                     </li>
-                    <li class="has-children notifications active">
+                    <li class="has-children notifications ">
                         <a href="#0">Notifications<span class="count">3</span></a>
                     </li>
                     <li class="has-children comments">
@@ -63,6 +64,15 @@
                     </li>
                 </ul>
             </nav>
+
+            <p:ajaxStatus styleClass="ajax-status">
+                <f:facet name="start">
+                    <h:graphicImage library="olliver/imagens" name="gears.gif" />
+                </f:facet>
+                <f:facet name="complete">
+                    <h:outputText value="" />
+                </f:facet>
+            </p:ajaxStatus>
 
             <!-- CONTEUDO AQUI -->
             <div class="content-wrapper">

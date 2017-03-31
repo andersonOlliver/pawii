@@ -42,18 +42,7 @@ header > img{
     cursor:pointer;
 }
 
-.ajax-status {
-    position: fixed;
-    top: 60px;
-    right: 20px;
-    width: 45px;
-    height: 45px;
-}
 
-.ajax-status img{
-    width: 45px;
-    height: 45px
-}
 
 #conteudo{
     padding: 0px 8px;
@@ -89,6 +78,7 @@ div.login h1{
     margin: 20px;
     color: #33383e;
     font-weight: 700;
+    line-height: 1;
     font-size: 2.3rem;
     /*text-shadow: 0 0 3px #FFFFF0, 0 0 5px #00000F;*/
     text-align: center;
@@ -118,23 +108,6 @@ img.avatar {
 .message-login:hover{
     opacity: .8;
 }
-
-footer {
-    border-top: 1px solid #ccc;
-    padding: 5px 8px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    position: fixed;
-    float: right;
-    top: 92%;
-    bottom:0;
-    left:0;
-    width:100%;
-    height: 6%;
-    background-color: rgba(31,69,81,.4);
-    color: white;
-}
-
 
 
 h1 {

@@ -108,6 +108,7 @@ body {
 
 .navigation_container .rm-opened li {
     float: none;
+    background: #2c3e50;
 }
 
 .navigation_container a {

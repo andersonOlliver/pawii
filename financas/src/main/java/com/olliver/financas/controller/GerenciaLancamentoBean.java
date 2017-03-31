@@ -22,6 +22,7 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.context.RequestContext;
 import org.primefaces.model.chart.MeterGaugeChartModel;
 
 /**
@@ -56,6 +57,7 @@ public class GerenciaLancamentoBean implements Serializable {
 
     private void inicializarGrafico() {
         this.graficoGauge = this.inicializarValoresGrafico();
+        graficoGauge.setTitle("Situação Atual");
         graficoGauge.setSeriesColors("66cc66,93b75f,E7E658,cc6666,cc3535");
         graficoGauge.setGaugeLabel("R$");
         graficoGauge.setGaugeLabelPosition("bottom");
@@ -121,6 +123,7 @@ public class GerenciaLancamentoBean implements Serializable {
             this.cadastro.excluir(lancamento);
             this.consultar();
             this.consultarSituacao();
+//            RequestContext.getCurrentInstance().execute("loadValues()");
             FacesUtil.addInfoMessage("Removido com sucesso!");
         } catch (NegocioException ex) {
             FacesUtil.addErrorMessage(ex.getMessage());
