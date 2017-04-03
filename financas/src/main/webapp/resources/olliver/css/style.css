@@ -310,6 +310,15 @@ Top Navigation
   }
 }
 
+.cd-nav .active a,
+.cd-nav .active a:hover,
+.cd-nav .active a:focus {
+    background: #fff;
+    color: #333;
+    cursor: default;
+    box-shadow: 0px 2px 5px 0px rgba(100,135,128,1);
+}
+
 .cd-top-nav > li > a::before {
   /* reset style */
   display: none;
@@ -336,16 +345,20 @@ Top Navigation
 @media only screen and (min-width: 768px) {
   .cd-top-nav {
     height: 100%;
+    min-height: 54px;
+    margin-right: 30px;
   }
   .cd-top-nav a {
     display: block;
-    font-size: 1.4rem;
+    font-size: 1.7rem;
     color: #ffffff;
+    min-height: 54px;
   }
   .cd-top-nav > li {
     display: inline-block;
     margin-right: 1em;
     height: 100%;
+    min-height: 54px;
   }
   .cd-top-nav > li:last-of-type {
     margin-right: 0;

@@ -30,3 +30,35 @@ footer {
     background-color: rgba(31,69,81,.4);
     color: white;
 }
+
+.no-padding{
+    padding: 0px !important;
+}
+
+.ui-tabs .ui-tabs-panel {
+    border-width: 0;
+    padding: 0px !important;
+    background: 0;
+}
+.jqplot-event-canvas{
+    width: 30%;
+    height: 50%;
+    min-height: 280px;
+    min-width: 300px;
+    margin: 0 auto;
+}
+.jqplot-highlight-canvas{
+    align-content: center;
+}
+
+#painel-grafico{
+    margin: 0 auto;
+    align-content: center;
+}
+#g1 {
+    width:30%; 
+    height: 50%;
+    min-height: 280px;
+    min-width: 300px;
+    margin: 0 auto;
+}

@@ -9,6 +9,8 @@
         <f:facet name="first">
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link href="../resources/olliver/imagens/pie-chart.png" rel="shortcut icon" /> 
         </f:facet>
         <title><ui:insert name="titulo">GestorFinanceiro</ui:insert></title>
 
@@ -17,11 +19,25 @@
         <h:outputStylesheet library="olliver/css" name="estilo.css" />
         <h:outputStylesheet library="olliver/css" name="components.css" />
         <h:outputScript library="olliver/js" name="modernizr.js" />
+        
 
-        <link href="../resources/olliver/imagens/pie-chart.png" rel="shortcut icon" /> 
+        <script>
+            $(document).ready(function () {
+                var pathname = window.location.pathname;
+
+                if (pathname.indexOf("entrar") >= 0) {
+                    $("#entrar").addClass("active");
+                } else if (pathname.indexOf("index") >= 0 || pathname.slice(-10) === "/financas/") {
+                    $("#inicio").addClass("active");
+                } else if (pathname.indexOf("inscrever") >= 0) {
+                    $("#cadastrar").addClass("active");
+                }
+            });
+        </script>
     </h:head>
 
     <h:body>
+
         <header class="cd-main-header">
             <h:graphicImage class="cd-logo" library="olliver/imagens" name="GestorPessoal.png" />
 
@@ -29,41 +45,14 @@
             <h:form>
                 <nav class="cd-nav">
                     <ul class="cd-top-nav">
-                        <li><a href="#0">Tour</a></li>
-                        <li><a href="#0">Support</a></li>
-                        <li class="has-children account">
-                            <a href="#0">
-                                <h:graphicImage class="cd-logo" library="olliver/imagens" name="user.png" alt="Avatar" />
-                                <h:outputText value="#{loginBean.usuario.nome}" />
-                            </a>
-
-                            <ul>
-                                <li><p:link outcome="editar-perfil">Editar Perfil</p:link></li>
-                                <li><a href="#0">Editar Perfil</a></li>
-                                <li>
-                                    <p:commandLink action="#{loginBean.logout}" shape="circle">Sair</p:commandLink>
-                                </li>
-                            </ul>
-                        </li>
+                        <li id="inicio" class="" role="presentation"><p:link outcome="index">Home</p:link></li>
+                        <li id="entrar" class="" role="presentation"><p:link outcome="entrar">Entrar</p:link></li>
+                        <li id="cadastrar" class="" role="presentation"><p:link outcome="inscrever">Cadastrar</p:link></li>
                     </ul>
                 </nav>
             </h:form>
         </header>
         <main class="cd-main-content">
-            <nav class="cd-side-nav">
-                <ul>
-                    <li class="cd-label">Main</li>
-                    <li class="has-children overview active">
-                        <a href="#0">Visão Geral</a>
-                    </li>
-                    <li class="has-children notifications ">
-                        <a href="#0">Notifications<span class="count">3</span></a>
-                    </li>
-                    <li class="has-children comments">
-                        <a href="#0">Top despesas</a>
-                    </li>
-                </ul>
-            </nav>
 
             <p:ajaxStatus styleClass="ajax-status">
                 <f:facet name="start">
@@ -83,7 +72,6 @@
 
         <footer> GestorFinanceiro - Desenvolvido por Anderson Oliveira Santos </footer>
 
-        <!--<h:outputScript target="body" library="olliver" name="js/jquery-2.1.4.js" />-->
         <h:outputScript target="body" library="olliver" name="js/jquery.menu-aim.js" />
         <h:outputScript target="body" library="olliver" name="js/main.js" />
     </h:body>

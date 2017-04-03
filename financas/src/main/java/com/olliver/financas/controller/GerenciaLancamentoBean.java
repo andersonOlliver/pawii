@@ -19,6 +19,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -53,29 +55,7 @@ public class GerenciaLancamentoBean implements Serializable {
     private Date fim;
     private Double saldo;
     private Double gasto;
-    private MeterGaugeChartModel graficoGauge;
-
-    private void inicializarGrafico() {
-        this.graficoGauge = this.inicializarValoresGrafico();
-        graficoGauge.setTitle("Situação Atual");
-        graficoGauge.setSeriesColors("66cc66,93b75f,E7E658,cc6666,cc3535");
-        graficoGauge.setGaugeLabel("R$");
-        graficoGauge.setGaugeLabelPosition("bottom");
-        graficoGauge.setShowTickLabels(true);
-    }
-
-    private MeterGaugeChartModel inicializarValoresGrafico() {
-        List<Number> intervalos = new ArrayList<Number>() {
-            {
-                add(saldo * 0.2);
-                add(saldo * 0.4);
-                add(saldo * 0.6);
-                add(saldo * 0.8);
-                add(saldo);
-            }
-        };
-        return new MeterGaugeChartModel(gasto, intervalos);
-    }
+    
 
     public void inicializar() {
         this.novoItem();
@@ -89,6 +69,8 @@ public class GerenciaLancamentoBean implements Serializable {
     }
 
     private void consultarSituacao() {
+        this.saldo = 0.0;
+        this.gasto = 0.0;
         try {
             this.saldo = this.repositorioLancamento.situacao(inicio, fim, autenticacao.getUsuario(), TipoLancamento.RECEITA);
             this.gasto = this.repositorioLancamento.situacao(inicio, fim, autenticacao.getUsuario(), TipoLancamento.DESPESA);
@@ -96,10 +78,6 @@ public class GerenciaLancamentoBean implements Serializable {
             this.saldo = this.saldo == null ? 0 : this.saldo;
             this.gasto = this.gasto == null ? 0 : this.gasto;
         }
-        System.out.println("Saldo = "+saldo);
-        System.out.println("Gasto = "+gasto);
-
-        this.inicializarGrafico();
     }
 
     public void salvar() {
@@ -109,7 +87,7 @@ public class GerenciaLancamentoBean implements Serializable {
             }
             System.out.println(lancamento);
             cadastro.salvar(lancamento);
-            this.novoItem();
+            lancamento = null;
             this.consultar();
             this.consultarSituacao();
             FacesUtil.addInfoMessage("Lançamento inserido com sucesso!");
@@ -118,16 +96,20 @@ public class GerenciaLancamentoBean implements Serializable {
         }
     }
 
-    public void excluir() {
+    public void excluir(Lancamento lancamento) {
         try {
             this.cadastro.excluir(lancamento);
             this.consultar();
             this.consultarSituacao();
-//            RequestContext.getCurrentInstance().execute("loadValues()");
+            this.atualizarGauge();
             FacesUtil.addInfoMessage("Removido com sucesso!");
         } catch (NegocioException ex) {
             FacesUtil.addErrorMessage(ex.getMessage());
         }
+    }
+    
+    public void atualizarGauge(){
+        RequestContext.getCurrentInstance().execute("g1.refresh(" + gasto + "," + saldo + ");");
     }
 
     public void novoItem() {
@@ -194,9 +176,4 @@ public class GerenciaLancamentoBean implements Serializable {
     public Double getGasto() {
         return gasto;
     }
-
-    public MeterGaugeChartModel getGraficoGauge() {
-        return graficoGauge;
-    }
-
 }

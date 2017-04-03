@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.olliver.financas.model;
 
 import java.io.Serializable;
@@ -19,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -37,21 +33,26 @@ public class Lancamento implements Serializable {
     @Column(precision = 20, scale = 2, nullable = false)
     private Double valor;
     
-    @Column(length = 80, nullable = false)
+    
+    @Column(length = 140)
     private String descricao;
     
+    @NotNull
     @Temporal(TemporalType.DATE)
+    @Column(name = "data_cadastro", nullable = false)
     private Date dataCadastro;
     
+    @NotNull
     @ManyToOne
-    @JoinColumn(name="usuario") 
+    @JoinColumn(name="usuario", nullable = false) 
     private Usuario usuario;
     
+    @NotNull
     @ManyToOne
-    @JoinColumn(name="categoria") 
+    @JoinColumn(name="categoria", nullable = false) 
     private Categoria categoria;
         
-    
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TipoLancamento tipo;
@@ -158,7 +159,4 @@ public class Lancamento implements Serializable {
     public String toString() {
         return "Lancamento{" + "id=" + id + ", valor=" + valor + ", descricao=" + descricao + ", dataCadastro=" + dataCadastro + ", usuario=" + usuario + ", categoria=" + categoria + ", tipo=" + tipo + '}';
     }
-
-    
-    
 }

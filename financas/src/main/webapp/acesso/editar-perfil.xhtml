@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template/layout-com-acesso.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    
+    <ui:define name="corpo">
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Id:" for="id" />
+                    <p:inputText id="id" value="#{editaUsuarioBean.usuario.id}" title="Id" />
+                    <p:outputLabel value="Nome:" for="nome" />
+                    <p:inputText id="nome" value="#{editaUsuarioBean.usuario.nome}" title="Nome" required="true" requiredMessage="The Nome field is required."/>
+                    <p:outputLabel value="DataNascimento:" for="dataNascimento" />
+                    <p:inputText id="dataNascimento" value="#{editaUsuarioBean.usuario.dataNascimento}" title="DataNascimento" required="true" requiredMessage="The DataNascimento field is required.">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </p:inputText>
+                    <p:outputLabel value="Email:" for="email" />
+                    <p:inputText id="email" value="#{editaUsuarioBean.usuario.email}" title="Email" required="true" requiredMessage="The Email field is required."/>
+                    <p:outputLabel value="Senha:" for="senha" />
+                    <p:inputText id="senha" value="#{editaUsuarioBean.usuario.senha}" title="Senha" required="true" requiredMessage="The Senha field is required."/>
+                    <p:outputLabel value="DataCadastro:" for="dataCadastro" />
+                    <p:inputText id="dataCadastro" value="#{editaUsuarioBean.usuario.dataCadastro}" title="DataCadastro" required="true" requiredMessage="The DataCadastro field is required."/>
+                    <p:outputLabel value="Tipo:" for="tipo" />
+                    <p:inputText id="tipo" value="#{editaUsuarioBean.usuario.tipo}" title="Tipo" required="true" requiredMessage="The Tipo field is required."/>
+                    <p:outputLabel value="Licenca:" for="licenca" />
+                    <p:selectOneMenu id="licenca" value="#{editaUsuarioBean.usuario.licenca}" >
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{fixme}"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+            </h:form>
+        </f:view>
+
+    </ui:define>
+</ui:composition>

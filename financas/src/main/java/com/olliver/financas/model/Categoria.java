@@ -32,6 +32,10 @@ public class Categoria implements Serializable {
     @Column(name = "descricao", nullable = false, unique = true)
     private String descricao;
 
+    
+    @Column(name = "color", columnDefinition = "varchar(10) default 'FFFFFF'")
+    private String color;
+
     public Long getId() {
         return id;
     }
@@ -46,6 +50,14 @@ public class Categoria implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     @Override
