@@ -47,5 +47,5 @@ Repositório para armarzenamento de exercícios e Trabalhos referentes à discip
    * Ajax;
    * RemoteCommand;
    * DataTable;
-   * ConfirmDialog;
+   * ConfirmDialog.
    
