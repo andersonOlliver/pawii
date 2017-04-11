@@ -11,25 +11,7 @@
     </f:metadata>
 
     <ui:define name="corpo">
-        <h:outputScript library="olliver/js/justgauge" name="raphael-2.1.4.min.js" /> 
-        <h:outputScript library="olliver/js/justgauge" name="justgage.js" /> 
 
-        <script type="text/javascript">
-            var g1;
-            window.onload = function () {
-                g1 = new JustGage({
-                    id: "g1",
-                    value: #{gerenciaLancamentoBean.gasto},
-                    min: 0,
-                    relativeGaugeSize: true,
-                    counter: true,
-                    formatNumber: true,
-                    max: #{gerenciaLancamentoBean.saldo},
-                    title: "Situação Atual",
-                    label: "R$"
-                });
-            };
-        </script>
 
         <h:form>
             <p:breadCrumb >
@@ -43,25 +25,21 @@
 
 
         <h:form id="frm">
+            <!-- componente invocado para atualizar os dados do gráfico -->
             <p:remoteCommand name="updateGauge" 
                              process="@form" 
                              actionListener="#{gerenciaLancamentoBean.atualizarGauge()}" />
 
+            <!-- Gráfico meter gauge -->
             <div id="painel-grafico">
                 <div id="g1"></div>
             </div>
-            
-<!--            <p:panel style="align-content: center">
-                <ui:repeat value="#{gerenciaLancamentoBean.despesas}" var="i">
-                    <p:knob value="${i.gasto}" thickness=".1" labelTemplate="R\$ {value}"
-                            max="#{gerenciaLancamentoBean.saldo}" disabled="true" />
-                    
-                </ui:repeat>
-            </p:panel>-->
-            
+
+            <!-- Título -->
             <h1><h:outputText value="Lançamentos"/></h1>
 
-
+            
+            <!-- Barra de Ferramentas -->
             <p:toolbar>
                 <p:toolbarGroup>
                     <p:commandButton value="Novo" action="#{gerenciaLancamentoBean.novoItem()}"
@@ -78,7 +56,6 @@
                                     value="#{gerenciaLancamentoBean.inicio}">
                             <p:ajax event="dateSelect" listener="#{gerenciaLancamentoBean.consultar()}" update="tableData" />
                         </p:calendar>
-                        <!--<p:spacer width="5px"/>-->
                         a
                         <p:calendar size="10" pattern="dd/MM/yyyy" 
                                     value="#{gerenciaLancamentoBean.fim}">
@@ -88,6 +65,8 @@
                 </p:toolbarGroup>
             </p:toolbar>
 
+            
+            <!-- Tabela com os dados -->
             <p:dataTable id="tableData" value="#{gerenciaLancamentoBean.lancamentos}" var="item"
                          emptyMessage="Nenhum dado para esse período" reflow="true"
                          rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
@@ -131,11 +110,15 @@
                 </p:column>
             </p:dataTable>
 
+            
+            <!-- Janela de confirmação da exclusão de um lançamento -->
             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="updateGauge()"/>
                 <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
             </p:confirmDialog>
-
+            
+            
+            <!-- Janela de cadastro de novo lançamento -->
             <p:dialog widgetVar="cadastroLancamento" header="Novo Lançamento"
                       responsive="true" modal="true" closeOnEscape="true"
                       resizable="false" style="min-width: 300px">
@@ -183,6 +166,24 @@
             </p:dialog>
         </h:form>
 
+        <h:outputScript library="olliver/js/justgauge" name="raphael-2.1.4.min.js" /> 
+        <h:outputScript library="olliver/js/justgauge" name="justgage.js" /> 
 
+        <script type="text/javascript">
+            var g1;
+            window.onload = function () {
+                g1 = new JustGage({
+                    id: "g1",
+                    value: #{gerenciaLancamentoBean.gasto},
+                    min: 0,
+                    relativeGaugeSize: true,
+                    counter: true,
+                    formatNumber: true,
+                    max: #{gerenciaLancamentoBean.saldo},
+                    title: "Situação Atual",
+                    label: "R$"
+                });
+            };
+        </script>
     </ui:define>
 </ui:composition>

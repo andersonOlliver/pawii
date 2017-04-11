@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template/layout-com-acesso.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="corpo">
+        <h:form>
+            <p:breadCrumb >
+                <p:menuitem value="Início" url="#"/>
+                <p:menuitem value="Categorias" url="#"/>
+            </p:breadCrumb>
+        </h:form>
+        
+        
+        <h1 class="aw-page-title">Categorias - último mês</h1>
+
+        <h:outputStylesheet library="primefaces" name="grid/grid.css"/>
+
+        <div class="ui-g">
+            <div class="ui-g-6 ui-md-3">
+                <div class="box">
+                    <span>R$ 444</span>
+                    <h2>Alimentação</h2>
+                </div>
+            </div>
+
+            <div class="ui-g-6 ui-md-3">
+                <div class="box">
+                    <span>R$ 76</span>
+                    <h2>Transporte</h2>
+                </div>
+            </div>
+
+            <div class="ui-g-12 ui-md-6">
+                <div class="box">
+                    <span>R$ 387,324.65</span>
+                    <h2>Lazer</h2>
+                </div>
+            </div>
+
+            <div class="ui-g-12 ui-lg-6">
+                <div class="box">
+                    <span>R$ 59</span>
+                    <h2>Casa</h2>
+                </div>
+            </div>
+
+            <div class="ui-g-12 ui-lg-6">
+                <div class="box">
+                    <span>R$ 3</span>
+                    <h2>Outros</h2>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>

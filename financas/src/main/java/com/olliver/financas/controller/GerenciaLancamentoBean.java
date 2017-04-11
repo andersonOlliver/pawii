@@ -48,7 +48,6 @@ public class GerenciaLancamentoBean implements Serializable {
 
     private List<Lancamento> lancamentos;
     private List<Categoria> categorias;
-    private List<LancamentoCategoria> despesas;
     private Lancamento lancamento;
     private Usuario usuario;
     private Date inicio;
@@ -56,7 +55,11 @@ public class GerenciaLancamentoBean implements Serializable {
     private Double saldo;
     private Double gasto;
     
-
+    /**
+     * Executado na primeira renderização da página para o cliente
+     * esse método irá invocar as ações para atribuir os valores 
+     * iniciais para construção da página.
+     */
     public void inicializar() {
         this.novoItem();
         this.setDefault();
@@ -64,12 +67,16 @@ public class GerenciaLancamentoBean implements Serializable {
         this.consultar();
     }
 
+    /**
+     * Busca os dados para a tabela
+     */
     public void consultar() {
         this.lancamentos = repositorioLancamento.periodo(inicio, fim, usuario);
-        this.despesas = repositorioLancamento.despesaCategoriaPeriodo(inicio, fim, usuario);
-        System.out.println(despesas);
     }
-
+    
+    /**
+     * Busca exatamente os dados para o gráfico
+     */
     private void consultarSituacao() {
         this.saldo = 0.0;
         this.gasto = 0.0;
@@ -82,6 +89,7 @@ public class GerenciaLancamentoBean implements Serializable {
         }
     }
 
+    
     public void salvar() {
         try {
             if (lancamento.getUsuario() == null) {
@@ -98,6 +106,13 @@ public class GerenciaLancamentoBean implements Serializable {
         }
     }
 
+    /**
+     * 
+     * @param lancamento para ser excluído
+     * 
+     * Esse método exclui o lançamento recebido por parâmetro
+     * e logo a seguir atualiza os dados para serem exebidos
+     */
     public void excluir(Lancamento lancamento) {
         try {
             this.cadastro.excluir(lancamento);
@@ -110,28 +125,41 @@ public class GerenciaLancamentoBean implements Serializable {
         }
     }
     
+    /**
+     * Método responsável por invocar o refresh() do gráfico justGauge
+     * que irá atualizar após uma inclusão/edição/exclusão de dados
+     */
     public void atualizarGauge(){
         RequestContext.getCurrentInstance().execute("g1.refresh(" + gasto + "," + saldo + ");");
     }
 
+    /**
+     * Prepara um novo objeto de lançamento para ser cadastrado
+     * logo após busca as categorias no banco de dados
+     */
     public void novoItem() {
         lancamento = new Lancamento();
         this.categorias = repositorioCategoria.todos();
     }
 
+    /**
+     * 
+     * @param lancamento Lançamento a ser editado
+     * prepara para o objeto lançamento para ser editado
+     */
     public void editar(Lancamento lancamento) {
         this.lancamento = lancamento;
-        System.out.println("Editar = " + lancamento);
     }
 
+    /**
+     * Settar os valores padrões de usuário e data
+     */
     private void setDefault() {
         this.usuario = autenticacao.getUsuario();
         LocalDate temp = LocalDate.now();
         int dia = temp.getDayOfMonth() - 1;
         LocalDate instant = LocalDate.of(temp.getYear(), temp.getMonth(), temp.withDayOfMonth(1).getDayOfMonth());
         inicio = DateUtils.asDate(instant);
-        System.out.println("Inicio = " + inicio);
-        System.out.println("Fim = " + fim);
         fim = new Date();
     }
 
@@ -178,11 +206,6 @@ public class GerenciaLancamentoBean implements Serializable {
 
     public Double getGasto() {
         return gasto;
-    }
-
-    public List<LancamentoCategoria> getDespesas() {
-        return despesas;
-    }
-    
+    }  
     
 }
