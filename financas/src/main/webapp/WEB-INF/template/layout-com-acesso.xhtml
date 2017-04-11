@@ -3,7 +3,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
 
     <h:head>
         <f:facet name="first">
@@ -34,7 +35,10 @@
                         <li><a href="#0">Support</a></li>
                         <li class="has-children account">
                             <a href="#0">
-                                <h:graphicImage class="cd-logo" library="olliver/imagens" name="user.png" alt="Avatar" />
+                                <p:graphicImage class="cd-logo" library="olliver/imagens" name="user.png" alt="Avatar" rendered="#{empty loginBean.usuario.imagemPerfil}"/>
+                                <o:graphicImage class="cd-logo" value="#{loginBean.usuario.imagemPerfil}" 
+                                                dataURI="true" alt="Avatar" 
+                                                rendered="#{not empty loginBean.usuario.imagemPerfil}"/>
                                 <h:outputText value="#{loginBean.usuario.nome}" />
                             </a>
 

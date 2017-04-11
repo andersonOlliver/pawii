@@ -36,7 +36,7 @@ public class CadastroUsuario implements Serializable {
             } catch (NoResultException ne) {
                 if (!usuario.getSenha().equals(senhaConfirmacao)) {
                     throw new NegocioException("Senhas não conferem!");
-                }else if(usuario.getDataNascimento().after(new Date())){
+                } else if (usuario.getDataNascimento().after(new Date())) {
                     throw new NegocioException("Data de nascimento não pode estar no futuro!");
                 }
                 if (usuario.getDataCadastro() == null) {
@@ -45,6 +45,24 @@ public class CadastroUsuario implements Serializable {
 
                 this.usuarios.adicionar(usuario);
             }
+
+        }
+    }
+
+    @Transactional
+    public Usuario salvar(Usuario usuario) throws NegocioException {
+        if (usuario == null) {
+            throw new NegocioException("Usuário inválido!");
+        } else {
+
+            if (usuario.getDataNascimento().after(new Date())) {
+                throw new NegocioException("Data de nascimento não pode estar no futuro!");
+            }
+            if (usuario.getDataCadastro() == null) {
+                usuario.setDataCadastro(LocalDateTime.now());
+            }
+
+            return this.usuarios.guardar(usuario);
 
         }
     }

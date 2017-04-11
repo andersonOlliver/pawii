@@ -29,6 +29,10 @@
             </h:panelGrid>
             <o:graphicImage value="#{cadastroImagemBean.content}" dataURI="true" width="500"
                             rendered="#{not empty cadastroImagemBean.content}" />
+            <h:commandButton value="Salvar" action="#{cadastroImagemBean.salvar()}" />
+        </h:form>
+        <h:form>
+            
         </h:form>
     </ui:define>
 

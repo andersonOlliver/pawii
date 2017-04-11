@@ -10,13 +10,16 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -61,13 +64,12 @@ public class Usuario implements Serializable {
     @AssertTrue()
     @Column(nullable = false, columnDefinition = "tinyint(1) default 1")
     private boolean aceite;
-    
+
 //    @NotEmpty
 //    @Column(name="imagem_perfil", nullable = false)
 //    private String imagemPerfil = "user.png";
-    
     @ManyToOne
-    @JoinColumn(name="licenca")
+    @JoinColumn(name = "licenca")
     private Licenca licenca;
 
     @NotNull
@@ -77,6 +79,10 @@ public class Usuario implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TipoUsuario tipo;
+
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
+    private byte[] imagemPerfil;
 
     public Usuario() {
         tipo = TipoUsuario.COMUM;
@@ -154,14 +160,14 @@ public class Usuario implements Serializable {
         this.licenca = licenca;
     }
 
-//    public String getImagemPerfil() {
-//        return imagemPerfil;
-//    }
-//
-//    public void setImagemPerfil(String imagemPerfil) {
-//        this.imagemPerfil = imagemPerfil;
-//    }
-    
+    public byte[] getImagemPerfil() {
+        return imagemPerfil;
+    }
+
+    public void setImagemPerfil(byte[] imagemPerfil) {
+        this.imagemPerfil = imagemPerfil;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
