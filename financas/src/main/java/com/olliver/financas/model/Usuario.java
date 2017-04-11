@@ -62,6 +62,10 @@ public class Usuario implements Serializable {
     @Column(nullable = false, columnDefinition = "tinyint(1) default 1")
     private boolean aceite;
     
+//    @NotEmpty
+//    @Column(name="imagem_perfil", nullable = false)
+//    private String imagemPerfil = "user.png";
+    
     @ManyToOne
     @JoinColumn(name="licenca")
     private Licenca licenca;
@@ -150,6 +154,14 @@ public class Usuario implements Serializable {
         this.licenca = licenca;
     }
 
+//    public String getImagemPerfil() {
+//        return imagemPerfil;
+//    }
+//
+//    public void setImagemPerfil(String imagemPerfil) {
+//        this.imagemPerfil = imagemPerfil;
+//    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

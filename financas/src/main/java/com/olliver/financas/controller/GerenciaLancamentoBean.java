@@ -8,24 +8,22 @@ package com.olliver.financas.controller;
 import com.olliver.financas.model.Categoria;
 import com.olliver.financas.model.Lancamento;
 import com.olliver.financas.model.TipoLancamento;
+import com.olliver.financas.model.Usuario;
 import com.olliver.financas.repository.Categorias;
 import com.olliver.financas.repository.Lancamentos;
+import com.olliver.financas.repository.util.LancamentoCategoria;
 import com.olliver.financas.service.CadastroLancamento;
 import com.olliver.financas.service.NegocioException;
 import com.olliver.financas.util.date.DateUtils;
 import com.olliver.financas.util.jsf.FacesUtil;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.context.RequestContext;
-import org.primefaces.model.chart.MeterGaugeChartModel;
 
 /**
  *
@@ -50,7 +48,9 @@ public class GerenciaLancamentoBean implements Serializable {
 
     private List<Lancamento> lancamentos;
     private List<Categoria> categorias;
+    private List<LancamentoCategoria> despesas;
     private Lancamento lancamento;
+    private Usuario usuario;
     private Date inicio;
     private Date fim;
     private Double saldo;
@@ -65,15 +65,17 @@ public class GerenciaLancamentoBean implements Serializable {
     }
 
     public void consultar() {
-        this.lancamentos = repositorioLancamento.periodo(inicio, fim, autenticacao.getUsuario());
+        this.lancamentos = repositorioLancamento.periodo(inicio, fim, usuario);
+        this.despesas = repositorioLancamento.despesaCategoriaPeriodo(inicio, fim, usuario);
+        System.out.println(despesas);
     }
 
     private void consultarSituacao() {
         this.saldo = 0.0;
         this.gasto = 0.0;
         try {
-            this.saldo = this.repositorioLancamento.situacao(inicio, fim, autenticacao.getUsuario(), TipoLancamento.RECEITA);
-            this.gasto = this.repositorioLancamento.situacao(inicio, fim, autenticacao.getUsuario(), TipoLancamento.DESPESA);
+            this.saldo = this.repositorioLancamento.situacao(inicio, fim, usuario, TipoLancamento.RECEITA);
+            this.gasto = this.repositorioLancamento.situacao(inicio, fim, usuario, TipoLancamento.DESPESA);
         } catch (NullPointerException ne) {
             this.saldo = this.saldo == null ? 0 : this.saldo;
             this.gasto = this.gasto == null ? 0 : this.gasto;
@@ -83,7 +85,7 @@ public class GerenciaLancamentoBean implements Serializable {
     public void salvar() {
         try {
             if (lancamento.getUsuario() == null) {
-                lancamento.setUsuario(autenticacao.getUsuario());
+                lancamento.setUsuario(usuario);
             }
             System.out.println(lancamento);
             cadastro.salvar(lancamento);
@@ -123,6 +125,7 @@ public class GerenciaLancamentoBean implements Serializable {
     }
 
     private void setDefault() {
+        this.usuario = autenticacao.getUsuario();
         LocalDate temp = LocalDate.now();
         int dia = temp.getDayOfMonth() - 1;
         LocalDate instant = LocalDate.of(temp.getYear(), temp.getMonth(), temp.withDayOfMonth(1).getDayOfMonth());
@@ -176,4 +179,10 @@ public class GerenciaLancamentoBean implements Serializable {
     public Double getGasto() {
         return gasto;
     }
+
+    public List<LancamentoCategoria> getDespesas() {
+        return despesas;
+    }
+    
+    
 }

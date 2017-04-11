@@ -26,7 +26,6 @@
                     formatNumber: true,
                     max: #{gerenciaLancamentoBean.saldo},
                     title: "Situação Atual",
-
                     label: "R$"
                 });
             };
@@ -48,11 +47,18 @@
                              process="@form" 
                              actionListener="#{gerenciaLancamentoBean.atualizarGauge()}" />
 
-            <!--            <p:tabView id="situacao" cache="false" widgetVar="tabs">
-                            <p:tab title="Gráfico jQuery">-->
-                    <div id="painel-grafico">
-                        <div id="g1"></div>
-                    </div>
+            <div id="painel-grafico">
+                <div id="g1"></div>
+            </div>
+            
+<!--            <p:panel style="align-content: center">
+                <ui:repeat value="#{gerenciaLancamentoBean.despesas}" var="i">
+                    <p:knob value="${i.gasto}" thickness=".1" labelTemplate="R\$ {value}"
+                            max="#{gerenciaLancamentoBean.saldo}" disabled="true" />
+                    
+                </ui:repeat>
+            </p:panel>-->
+            
             <h1><h:outputText value="Lançamentos"/></h1>
 
 
@@ -86,6 +92,12 @@
                          emptyMessage="Nenhum dado para esse período" reflow="true"
                          rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 
+                <p:column headerText="Data">
+                    <h:outputText value="#{item.dataCadastro}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+
                 <p:column headerText="Valor" >
                     <h:outputText  value="#{item.valor}" style="float: right">
                         <f:convertNumber type="currency"/>
@@ -94,12 +106,6 @@
 
                 <p:column headerText="Descrição">
                     <h:outputText value="#{item.descricao}"/>
-                </p:column>
-
-                <p:column headerText="Data">
-                    <h:outputText value="#{item.dataCadastro}">
-                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                    </h:outputText>
                 </p:column>
 
                 <p:column headerText="Tipo">
@@ -140,7 +146,7 @@
                     <p:panelGrid columns="1" layout="grid" styleClass="panelgrid-noborder ui-fluid">
 
                         <p:outputLabel value="Valor:" for="valor" />
-                        <p:inputNumber id="valor" value="#{gerenciaLancamentoBean.lancamento.valor}" 
+                        <p:inputNumber id="valor" symbol="R$" value="#{gerenciaLancamentoBean.lancamento.valor}" 
                                        required="true" title="Valor" />
 
                         <p:outputLabel value="Data:" for="dataCadastro" />
@@ -157,7 +163,6 @@
 
                         <p:outputLabel value="Categoria:" for="categoria" />
                         <p:selectOneMenu id="categoria" value="#{gerenciaLancamentoBean.lancamento.categoria}" >
-                            <!-- TODO: update below reference to list of available items-->
                             <f:selectItem noSelectionOption="true" itemLabel="Selecione"/>
                             <f:selectItems value="#{gerenciaLancamentoBean.categorias}" var="categoria"
                                            itemLabel="#{categoria.descricao}" itemValue="#{categoria}"/>

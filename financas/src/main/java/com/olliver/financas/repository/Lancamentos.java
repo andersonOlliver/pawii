@@ -8,6 +8,7 @@ package com.olliver.financas.repository;
 import com.olliver.financas.model.Lancamento;
 import com.olliver.financas.model.TipoLancamento;
 import com.olliver.financas.model.Usuario;
+import com.olliver.financas.repository.util.LancamentoCategoria;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,9 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -58,6 +62,21 @@ public class Lancamentos implements Serializable {
         return ((Number) query.getSingleResult()).doubleValue();
     }
 
+//    public List<LancamentoCategoria> despesaCategoriaPeriodo(Date inicio, Date fim, Usuario usuario) {
+//        Criteria criteria = criarCriteria();
+//        
+//        criteria.add(Restrictions.ilike(propertyName, fim));
+//        
+//    }
+    public List<LancamentoCategoria> despesaCategoriaPeriodo(Date inicio, Date fim, Usuario usuario) {
+        TypedQuery<LancamentoCategoria> query = manager.createQuery("SELECT NEW com.olliver.financas.repository.util.LancamentoCategoria(L.categoria.descricao, SUM(L.valor)) FROM Lancamento AS L WHERE L.usuario=:usuario and L.tipo=:tipo and L.dataCadastro BETWEEN :inicio and :fim GROUP BY L.categoria ORDER BY L.categoria ASC ", LancamentoCategoria.class);
+        query.setParameter("usuario", usuario);
+        query.setParameter("inicio", inicio);
+        query.setParameter("fim", fim);
+        query.setParameter("tipo", TipoLancamento.DESPESA);
+        return query.getResultList();
+    }
+
     public void adicionar(Lancamento lancamento) {
         manager.persist(lancamento);
     }
@@ -69,4 +88,11 @@ public class Lancamentos implements Serializable {
     public void remover(Lancamento lancamento) {
         manager.remove(lancamento);
     }
+
+//    private Criteria criarCriteria() {
+//        Session session = manager.unwrap(Session.class);
+//        Criteria criteria = session.createCriteria(Lancamento.class);
+//        criteria.createAlias("", string1)
+//        return criteria;
+//    }
 }

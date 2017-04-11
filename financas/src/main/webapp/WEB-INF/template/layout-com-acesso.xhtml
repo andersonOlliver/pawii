@@ -17,6 +17,7 @@
         <h:outputStylesheet library="olliver/css" name="estilo.css" />
         <h:outputStylesheet library="olliver/css" name="components.css" />
         <h:outputScript library="olliver/js" name="modernizr.js" />
+       
 
         <link href="../resources/olliver/imagens/pie-chart.png" rel="shortcut icon" /> 
     </h:head>
@@ -39,7 +40,7 @@
 
                             <ul>
                                 <li><p:link outcome="editar-perfil">Editar Perfil</p:link></li>
-                                <li><a href="#0">Editar Perfil</a></li>
+                                <li><p:link outcome="editar-imagem">Alterar Imagem</p:link></li>
                                 <li>
                                     <p:commandLink action="#{loginBean.logout}" shape="circle">Sair</p:commandLink>
                                 </li>
@@ -61,6 +62,9 @@
                     </li>
                     <li class="has-children comments">
                         <a href="#0">Top despesas</a>
+                    </li>
+                    <li>
+                        <a href="#0">Categorias</a>
                     </li>
                 </ul>
             </nav>
