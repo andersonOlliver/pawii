@@ -31,8 +31,6 @@
             <h:form>
                 <nav class="cd-nav">
                     <ul class="cd-top-nav">
-                        <li><a href="#0">Tour</a></li>
-                        <li><a href="#0">Support</a></li>
                         <li class="has-children account">
                             <a href="#0">
                                 <p:graphicImage class="cd-logo" library="olliver/imagens" name="user.png" alt="Avatar" rendered="#{empty loginBean.usuario.imagemPerfil}"/>
@@ -59,7 +57,7 @@
                 <ul>
                     <li class="cd-label">Main</li>
                     <li class="has-children overview active">
-                        <a href="#0">Visão Geral</a>
+                        <p:link outcome="index"> Visão Geral</p:link>
                     </li>
                     <li class="has-children notifications ">
                         <a href="#0">Notifications<span class="count">3</span></a>

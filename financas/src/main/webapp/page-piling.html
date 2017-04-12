@@ -22,7 +22,7 @@
                         'textColor': '#f2f2f2',
                         'bulletsColor': '#ccc',
                         'position': 'right',
-                        'tooltips': ['Page 1', 'Page 2', 'Page 3', 'Page 4']
+                        'tooltips': ['O que é', 'Para quem', 'Page 3', 'Page 4']
                     }
                 });
             });
@@ -57,7 +57,8 @@
             /* Defining each section background and styles
             * --------------------------------------- */
             #section1{
-                background-image: url(resources/olliver/imagens/bg1.jpg);
+                background-image: url(resources/olliver/imagens/financas4.png);
+                background-position: left;
             }
             #section2{
                 background-image: url(resources/olliver/imagens/bg2.jpg);
@@ -78,10 +79,21 @@
                 left: 0;
                 right: 0;
                 margin: 0 auto;
-                top: 30px;
+                top: 60px;
                 color: #fff;
+                text-shadow: 1px 5px 20px #000;
+                line-height: 60px;
             }
 
+            #section1 p{
+                text-shadow: 1px 5px 10px #000;
+                text-align: right;
+                float: right;
+                color: #fff;
+                margin-top: 180px;
+                margin-right: 40px;
+            }
+            
             #section2 .intro{
                 position: absolute;
                 left: 0;
@@ -109,25 +121,28 @@
     <body>
 
         <ul id="menu">
-            <li data-menuanchor="page1" class="active"><a href="#page1">Page 1</a></li>
-            <li data-menuanchor="page2"><a href="#page2">Page 2</a></li>
+            <li data-menuanchor="page1" class="active"><a href="#page1">O que é</a></li>
+            <li data-menuanchor="page2"><a href="#page2">Para quem</a></li>
             <li data-menuanchor="page3"><a href="#page3">Page 3</a></li>
         </ul>
 
         <div id="pagepiling">
             <div class="section" id="section1">
-                <h1>pagePiling.js</h1>
+                <div class="intro">
+                <h1>Controle suas finanças</h1>
+                <p>É uma ferramenta online para registros de receitas e despesas.</p>
+                </div>
             </div>
             <div class="section" id="section2">
                 <div class="intro">
-                    <h1>Backgrounds </h1>
-                    <p>Show it in full screen!</p>
+                    <h1>Para quem? </h1>
+                    <p>O Gestor Pessoal é ideal para você controlar o seu fluxo de caixa pessoal!</p>
                 </div>
             </div>
             <div class="section" id="section3">
                 <div class="intro">
                     <h1>Just terrific!</h1>
-                    <p>Use the power of images</p>
+                    <p>asfasdf sfa sdfas fsa fsa </p>
                 </div>
             </div>
         </div>

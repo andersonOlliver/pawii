@@ -31,7 +31,8 @@ public class EditaUsuarioBean implements Serializable {
 
     public void salvar(){
         try {
-            this.cadastro.salvar(usuario, senhaConfirmacao);
+            this.cadastro.salvar(usuario);
+            FacesUtil.addInfoMessage("Alterado com sucesso");
         } catch (NegocioException ex) {
             FacesUtil.addErrorMessage(ex.getMessage());
         }
