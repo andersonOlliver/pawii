@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1"
-	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="financaPU">
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="financaPU">
       
-    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
     
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/financas"/>
-      <property name="javax.persistence.jdbc.user" value="devstrong"/>
-      <property name="javax.persistence.jdbc.password" value="BQNDlK8t"/>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/devStrong"/>
+            <property name="javax.persistence.jdbc.user" value="devStrong"/>
+            <property name="javax.persistence.jdbc.password" value="BQNDlK8t"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
       
-      <property name="hibernate.show_sql" value="true"/>
-      <property name="hibernate.format_sql" value="true"/>
-<!--      <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
       
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-      <property name="javax.persistence.schema-generation.create-source" value="metadata"/>
-      <property name="javax.persistence.sql-load-script-source" value="META-INF/sql/dados-iniciais.sql"/>-->
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="javax.persistence.schema-generation.create-source" value="metadata"/>
+            <property name="javax.persistence.sql-load-script-source" value="META-INF/sql/dados-iniciais.sql"/>
       
-      <!-- POOL DE CONEXÕES -->
-      <!--            <property name="hibernate.connection.provider_class" 
-                      value="org.hibernate.connection.C3P0ConnectionProvider" />
-			
-            <property name="hibernate.c3p0.max_size" value="2000" />
-            <property name="hibernate.c3p0.min_size" value="5" />
+            <!-- POOL DE CONEXÕES -->
+            <property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>
+      
+            <property name="hibernate.c3p0.min_size" value="1"/>
+            <property name="hibernate.c3p0.max_size" value="5"/>
             <property name="hibernate.c3p0.acquire_increment" value="1" />
-            <property name="hibernate.c3p0.idle_test_period" value="300" />
-            <property name="hibernate.c3p0.max_statements" value="50" />
-            <property name="hibernate.c3p0.timeout" value="300" />-->
+            <property name="hibernate.c3p0.timeout" value="60"/>
+            <property name="hibernate.c3p0.max_statements" value="10"/>
+            <property name="hibernate.c3p0.idle_test_period" value="30"/>
       
-    </properties>
+        </properties>
     
-  </persistence-unit>
+    </persistence-unit>
 </persistence>
